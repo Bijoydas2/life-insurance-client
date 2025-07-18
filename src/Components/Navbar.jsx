@@ -66,7 +66,7 @@ const Navbar = () => {
           {!user ? (
             <>
             
-              <button className="btn bg-primary border-none">   <Link to="/login"  className={navLinkClass}>Login</Link></button>
+              <button className="btn bg-primary border-none"><Link to="/login"  className={navLinkClass}>Login</Link></button>
              
               
             </>
