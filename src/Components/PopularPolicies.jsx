@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 import { FaStar, FaFire } from "react-icons/fa";
 import { Link } from "react-router";
+import Loading from "./Loading";
 
 const PopularPolicies = () => {
   const axiosSecure = useAxiosSecure();
@@ -14,17 +15,17 @@ const PopularPolicies = () => {
       return res.data;
     },
   });
-
-  if (isLoading) return <p className="text-center">Loading...</p>;
+ 
+  if (isLoading) return <Loading/>;
 
   return (
-    <div className="mt-16 max-w-7xl mx-auto px-4">
+    <div className="mt-12 max-w-7xl mx-auto px-4">
       <h2 className="text-4xl font-bold text-center text-primary mb-10 flex items-center justify-center gap-2">
         <FaFire className="text-red-600 animate-pulse text-2xl" />
         Popular Policies
       </h2>
 
-      {/* grid এক কলামে, পুরো width */}
+     
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
         {policies.map((policy) => (
           <div
