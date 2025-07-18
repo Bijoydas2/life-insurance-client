@@ -16,6 +16,7 @@ const Home = () => {
             <LatestBlogs/>
             <NewsletterForm/>
             <MeetOurAgents/>
+            
          
         </div>
     );
