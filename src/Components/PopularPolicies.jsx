@@ -61,7 +61,7 @@ const PopularPolicies = () => {
         ))}
       </div>
          <div className="text-center mt-10">
-  <Link to="/all-policies">
+  <Link to="/allPolicies">
     <button className="bg-primary text-white px-6 py-2 rounded hover:bg-primary/90 transition duration-300">
       View All Policies
     </button>
