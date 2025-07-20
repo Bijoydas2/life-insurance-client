@@ -5,6 +5,10 @@ import Register from "../Pages/Register/Register";
 import AuthLayout from "../Layouts/AuthLayout";
 import Home from "../Pages/Home/Home";
 import AllPolicies from "../Pages/AllPolicies/AllPolicies";
+import PolicyDetailsPage from "../Pages/PolliciesDetails/PolicyDetailsPage";
+import QuotePage from "../Pages/PolliciesDetails/QuotePage";
+import PrivateRoute from "../Route/PrivateRoute";
+import ApplicationForm from "../Pages/Application/ApplicationForm";
 
 export const router = createBrowserRouter([
   {
@@ -18,7 +22,19 @@ export const router = createBrowserRouter([
       {
         path:'/allPolicies',
         Component:AllPolicies,
-      }
+      },
+      {
+        path:'/policy/:id',
+        Component:PolicyDetailsPage,
+      },
+      { 
+        path: "/quote",
+        element:<PrivateRoute><QuotePage/></PrivateRoute>
+      },  
+      { 
+        path: "/application",
+        element:<PrivateRoute><ApplicationForm/></PrivateRoute>
+      },  
     ]
   },
    {
@@ -32,7 +48,7 @@ export const router = createBrowserRouter([
       {
         path: 'register',
         Component: Register,
-        loader: () => fetch('./serviceCenter.json'),
+       
       }
     ]
   },

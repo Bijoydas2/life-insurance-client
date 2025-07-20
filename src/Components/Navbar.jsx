@@ -79,7 +79,7 @@ const Navbar = () => {
               </button>
 
               {profileOpen && (
-                <div className="absolute right-0 w-56 bg-white shadow-lg rounded-md text-gray-700 z-50">
+                <div className="absolute right-0 top-2 w-56 bg-white shadow-lg rounded-md text-gray-700 z-50">
                   <div className="flex flex-col items-center border-b pb-4 mb-4">
                     {user.photoURL ? (
                       <img src={user.photoURL} alt="User" className="h-16 w-16 rounded-full mb-2" />
