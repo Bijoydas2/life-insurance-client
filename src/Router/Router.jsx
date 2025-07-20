@@ -9,6 +9,8 @@ import PolicyDetailsPage from "../Pages/PolliciesDetails/PolicyDetailsPage";
 import QuotePage from "../Pages/PolliciesDetails/QuotePage";
 import PrivateRoute from "../Route/PrivateRoute";
 import ApplicationForm from "../Pages/Application/ApplicationForm";
+import BlogsPage from "../Pages/BlogsPage/BlogsPage";
+import BlogDetailsPage from "../Pages/BlogDetailsPage/BlogDetailsPage";
 
 export const router = createBrowserRouter([
   {
@@ -34,7 +36,15 @@ export const router = createBrowserRouter([
       { 
         path: "/application",
         element:<PrivateRoute><ApplicationForm/></PrivateRoute>
-      },  
+      },
+      {
+       path: "/blogs",
+       Component: BlogsPage,
+       },
+       {
+       path: "/blogs/:id",
+       element:<PrivateRoute><BlogDetailsPage/></PrivateRoute>
+       }  
     ]
   },
    {
