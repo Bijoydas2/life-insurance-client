@@ -4,6 +4,7 @@ import { useNavigate, useLocation } from "react-router";
 import UseAuth from "../../hooks/UseAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { toast } from "react-toastify";
+import { useQuery } from "@tanstack/react-query";
 
 const ApplicationForm = () => {
   const {
@@ -11,16 +12,28 @@ const ApplicationForm = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
+
   const axiosSecure = useAxiosSecure();
   const navigate = useNavigate();
   const location = useLocation();
   const policyId = location.state?.policyId;
-  const {user}= UseAuth();
+  const { user } = UseAuth();
+
+  // ✅ Load policy using React Query
+  const { data: policy, isLoading: policyLoading } = useQuery({
+    queryKey: ["policy", policyId],
+    enabled: !!policyId,
+    queryFn: async () => {
+      const res = await axiosSecure.get(`/policies/${policyId}`);
+      return res.data;
+    },
+  });
 
   const onSubmit = async (data) => {
     const applicationData = {
       ...data,
       policyId,
+      policyName: policy?.title || "", 
       email: user.email,
       name: user.displayName,
       status: "Pending",
@@ -30,12 +43,21 @@ const ApplicationForm = () => {
     try {
       await axiosSecure.post("/applications", applicationData);
       toast.success("Application submitted successfully!");
-      navigate("/"); // Redirect to home or success page
+      navigate("/"); // redirect to homepage or success page
     } catch (error) {
       console.error(error);
       toast.warn("Failed to submit application.");
     }
   };
+
+  if (policyLoading) {
+    return (
+      <div className="text-center py-20">
+        <span className="loading loading-spinner loading-lg text-primary"></span>
+        <p className="mt-4">Loading policy information...</p>
+      </div>
+    );
+  }
 
   return (
     <div className="max-w-2xl mx-auto p-6 bg-white shadow my-12 rounded">
@@ -43,7 +65,18 @@ const ApplicationForm = () => {
         Application Form
       </h2>
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-5 text-gray-700">
-        
+
+        {/* Policy Info */}
+        <div>
+          <label className="block font-semibold mb-1">Policy Name</label>
+          <input
+            type="text"
+            value={policy?.title || ""}
+            disabled
+            className="w-full p-2 border rounded bg-gray-100"
+          />
+        </div>
+
         {/* Personal Info */}
         <div className="grid md:grid-cols-2 gap-4">
           <div>

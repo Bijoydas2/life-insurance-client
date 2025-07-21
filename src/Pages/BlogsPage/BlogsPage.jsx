@@ -5,6 +5,7 @@ import { FaEye } from "react-icons/fa";
 import { format } from "date-fns";
 
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import Loading from "../../Components/Loading";
 
 const BlogsPage = () => {
   const axiosSecure = useAxiosSecure();
@@ -22,7 +23,7 @@ const BlogsPage = () => {
   });
 
   if (isLoading)
-    return <p className="text-center text-gray-600 py-10">Loading...</p>;
+    return <Loading/>;
 
   if (isError || !Array.isArray(blogs))
     return (

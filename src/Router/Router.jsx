@@ -11,6 +11,11 @@ import PrivateRoute from "../Route/PrivateRoute";
 import ApplicationForm from "../Pages/Application/ApplicationForm";
 import BlogsPage from "../Pages/BlogsPage/BlogsPage";
 import BlogDetailsPage from "../Pages/BlogDetailsPage/BlogDetailsPage";
+import DashboardLayout from "../Layouts/DashboardLayout";
+import ManageUsers from "../Pages/Dashboard/ManageUsers";
+import ManagePolicies from "../Pages/Dashboard/ManagePolicies";
+import ManageTransactions from "../Pages/Dashboard/ManageTransactions";
+import ManageApplications from "../Pages/Dashboard/ManageApplications";
 
 export const router = createBrowserRouter([
   {
@@ -62,4 +67,26 @@ export const router = createBrowserRouter([
       }
     ]
   },
+  { path: '/dashboard',
+    element: <PrivateRoute><DashboardLayout /></PrivateRoute>,
+     children: [
+    {
+      path: 'applications',
+      Component: ManageApplications,
+    },
+    {
+      path: 'users',
+      Component: ManageUsers,
+    },
+    {
+      path: 'policies',
+      Component: ManagePolicies,
+    },
+    {
+      path: 'transactions',
+      Component: ManageTransactions,
+    }
+  ]
+  }
+
 ]);
