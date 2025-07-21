@@ -43,7 +43,7 @@ const PopularPolicies = () => {
                 {policy.description.slice(0, 100)}...
               </p>
               <div className="flex justify-between items-center mt-4 mb-4">
-                <span className="text-lg font-bold text-primary">${policy.price}</span>
+                <span className="text-lg font-bold text-primary">${policy.basePremium}</span>
                 <span className="flex items-center gap-1 text-yellow-500">
                   <FaStar className="text-yellow-500" />
                   {policy.rating || 4.5}

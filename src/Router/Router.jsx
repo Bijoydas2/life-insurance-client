@@ -12,10 +12,10 @@ import ApplicationForm from "../Pages/Application/ApplicationForm";
 import BlogsPage from "../Pages/BlogsPage/BlogsPage";
 import BlogDetailsPage from "../Pages/BlogDetailsPage/BlogDetailsPage";
 import DashboardLayout from "../Layouts/DashboardLayout";
-import ManageUsers from "../Pages/Dashboard/ManageUsers";
-import ManagePolicies from "../Pages/Dashboard/ManagePolicies";
-import ManageTransactions from "../Pages/Dashboard/ManageTransactions";
-import ManageApplications from "../Pages/Dashboard/ManageApplications";
+import ManageApplications from "../Pages/Dashboard/AdminDashboard/MangeApplication/ManageApplications";
+import ManageUsers from "../Pages/Dashboard/AdminDashboard/ManageUsers/ManageUsers";
+import ManagePolicies from "../Pages/Dashboard/AdminDashboard/ManagePolicies/ManagePolicies";
+import ManageTransactions from "../Pages/Dashboard/AdminDashboard/ManageTransaction/ManageTransactions";
 
 export const router = createBrowserRouter([
   {
