@@ -92,7 +92,7 @@ const DashboardLayout = () => {
               }`}
             >
               <FaTasks className="text-lg" />
-              <span>Assigned Applications</span>
+              <span>Assigned Customer</span>
             </Link>
             </>
           )}

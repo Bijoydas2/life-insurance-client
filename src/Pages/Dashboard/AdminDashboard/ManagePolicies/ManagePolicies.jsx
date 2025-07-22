@@ -3,6 +3,7 @@ import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import PolicyTable from "./PolicyTable";
 import PolicyFormModal from "./PolicyFormModal";
+import { FaPlus } from "react-icons/fa";
 
 const ManagePolicies = () => {
   const axiosSecure = useAxiosSecure();
@@ -30,9 +31,12 @@ const ManagePolicies = () => {
   return (
     <div className="p-4">
       <h2 className="text-3xl font-bold mb-4 text-primary">Manage Policies</h2>
-      <button onClick={handleAdd} className="btn btn-primary mb-4 text-right">
-        Add New Policy
-      </button>
+      
+      <div className="flex justify-end mb-4">
+        <button onClick={handleAdd} className="btn btn-primary flex items-center gap-2">
+          <FaPlus /> Add New Policy
+        </button>
+      </div>
 
       <PolicyTable
         policies={policies}

@@ -16,6 +16,7 @@ import ManageApplications from "../Pages/Dashboard/AdminDashboard/MangeApplicati
 import ManageUsers from "../Pages/Dashboard/AdminDashboard/ManageUsers/ManageUsers";
 import ManagePolicies from "../Pages/Dashboard/AdminDashboard/ManagePolicies/ManagePolicies";
 import ManageTransactions from "../Pages/Dashboard/AdminDashboard/ManageTransaction/ManageTransactions";
+import AssignedCustomer from "../Pages/Dashboard/CustomerDashboard/AssignedCustomer";
 
 export const router = createBrowserRouter([
   {
@@ -85,6 +86,11 @@ export const router = createBrowserRouter([
     {
       path: 'transactions',
       Component: ManageTransactions,
+    },
+    // agent panel
+    {
+      path:'assigned',
+      Component:AssignedCustomer
     }
   ]
   }
