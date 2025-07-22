@@ -34,6 +34,8 @@ const ApplicationForm = () => {
       ...data,
       policyId,
       policyName: policy?.title || "", 
+      basePremium:policy?.basePremium,
+      duration:policy?.durationOptions,
       email: user.email,
       name: user.displayName,
       status: "Pending",

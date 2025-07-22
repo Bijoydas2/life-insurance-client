@@ -11,14 +11,16 @@ import {
 } from "react-icons/fa";
 import LifeSecure from "../Components/lifeSecure";
 import useUserRole from "../hooks/UseUserRole";
+import Loading from '../Components/Loading'
 
 
 const DashboardLayout = () => {
   const location = useLocation();
   const { role, isLoading } =useUserRole();
-
+ console.log("DashboardLayout Role:", role, "Loading:", isLoading);
   const isActive = (path) => location.pathname.includes(path);
-
+  
+  
   return (
     <div className="min-h-screen flex bg-gray-100">
       {/* Sidebar */}
@@ -75,7 +77,7 @@ const DashboardLayout = () => {
               }`}
             >
                <FaBlog className="text-lg" />
-              <span>Mannage Blogs</span>
+              <span>Manage Blogs</span>
             </Link>
 
               <Link
@@ -92,7 +94,7 @@ const DashboardLayout = () => {
             </>
           )}
 
-          {!isLoading && role === "agent" && (
+          {role === "agent" && (
             <>
               <h2 className="text-2xl font-bold mb-10 text-primary tracking-wide">Agent Panel</h2>
             <Link
@@ -115,27 +117,27 @@ const DashboardLayout = () => {
               }`}
             >
                <FaBlog className="text-lg" />
-              <span>Mannage Blogs</span>
+              <span>Manage Blogs</span>
             </Link>
             </>
           )}
 
-          {!isLoading && role === "customer" && (
-            <>
-              <h2 className="text-2xl font-bold mb-5 text-primary tracking-wide">Customer Panel</h2>
-            <Link
-              to="/dashboard/my-applications"
-              className={`flex items-center gap-3 px-4 py-2 rounded-lg transition ${
-                isActive("my-applications")
-                  ? "bg-gray-100 border-l-4 border-primary font-semibold"
-                  : "hover:bg-gray-50"
-              }`}
-            >
-              <FaUserCheck className="text-lg" />
-              <span>My Applications</span>
-            </Link>
-            </>
-          )}
+       {role ==='customer' && (
+   <>
+    <h2 className="text-2xl font-bold mb-5 text-primary tracking-wide">Customer Panel</h2>
+    <Link
+      to="/dashboard/my-applications"
+      className={`flex items-center gap-3 px-4 py-2 rounded-lg transition ${
+        isActive("my-applications")
+          ? "bg-gray-100 border-l-4 border-primary font-semibold"
+          : "hover:bg-gray-50"
+      }`}
+    >
+      <FaUserCheck className="text-lg" />
+      <span>My Applications</span>
+    </Link>
+   </>
+  )}
         </nav>
       </aside>
 
