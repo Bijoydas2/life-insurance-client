@@ -44,18 +44,18 @@ const BlogDetailsPage = () => {
         className="w-full h-96 object-cover rounded-2xl mb-8 shadow-md"
       />
 
-      {/* Date */}
+     
       <p className="text-gray-400 text-sm uppercase tracking-wide font-semibold mb-1">
         {format(new Date(blog.createdAt), "PPP")}
       </p>
 
-      {/* Title */}
+      
       <h1 className="text-4xl font-extrabold text-primary mb-6">{blog.title}</h1>
 
-      {/* Blog Content */}
+      
       <p className="text-gray-700 leading-relaxed text-lg mb-10">{blog.details}</p>
 
-      {/* Author & Visit */}
+ 
       <div className="flex items-center gap-5 text-gray-600 border-t border-gray-100 pt-6">
         <img
           src={blog.authorProfile}
@@ -64,7 +64,7 @@ const BlogDetailsPage = () => {
         />
         <div>
           <p className="font-semibold text-secondary">{blog.author}</p>
-          <p className="text-sm text-gray-400">Author</p>
+          <p className="text-sm text-gray-400">{blog.authorEmail}</p>
         </div>
 
         <span className="flex items-center gap-2 ml-auto text-secondary font-semibold">

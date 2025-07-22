@@ -16,7 +16,9 @@ import ManageApplications from "../Pages/Dashboard/AdminDashboard/MangeApplicati
 import ManageUsers from "../Pages/Dashboard/AdminDashboard/ManageUsers/ManageUsers";
 import ManagePolicies from "../Pages/Dashboard/AdminDashboard/ManagePolicies/ManagePolicies";
 import ManageTransactions from "../Pages/Dashboard/AdminDashboard/ManageTransaction/ManageTransactions";
-import AssignedCustomer from "../Pages/Dashboard/CustomerDashboard/AssignedCustomer";
+import AssignedCustomers from "../Pages/Dashboard/AgentDashboard/AssignedCustomer";
+import ManageBlogs from "../Pages/Dashboard/AdminAndCustomerPanel/ManageBlogs";
+
 
 export const router = createBrowserRouter([
   {
@@ -87,11 +89,17 @@ export const router = createBrowserRouter([
       path: 'transactions',
       Component: ManageTransactions,
     },
+    // agent and admin panel
+     {
+      path:'blogs',
+      Component:ManageBlogs
+    },
     // agent panel
     {
       path:'assigned',
-      Component:AssignedCustomer
-    }
+      Component:AssignedCustomers
+    },
+   
   ]
   }
 
