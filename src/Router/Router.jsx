@@ -19,6 +19,8 @@ import ManageTransactions from "../Pages/Dashboard/AdminDashboard/ManageTransact
 import AssignedCustomers from "../Pages/Dashboard/AgentDashboard/AssignedCustomer";
 import ManageBlogs from "../Pages/Dashboard/AdminAndCustomerPanel/ManageBlogs";
 import MyPoliciesApplication from "../Pages/Dashboard/CustomerDashboard/MyPolicies/MyPolicesApplication";
+import PaymentStatus from "../Pages/Dashboard/CustomerDashboard/PaymentStatus/PaymentStatus";
+import Payment from "../Pages/Dashboard/CustomerDashboard/Payment/Payment";
 
 
 
@@ -105,7 +107,15 @@ export const router = createBrowserRouter([
     {
       path:'my-applications',
       Component:MyPoliciesApplication
-    }
+    },
+    {
+      path:'payment-status',
+      Component:PaymentStatus,
+    },
+    {
+        path: 'payment', 
+        Component: Payment
+      },
    
   ]
   }

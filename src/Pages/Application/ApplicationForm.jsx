@@ -19,7 +19,6 @@ const ApplicationForm = () => {
   const policyId = location.state?.policyId;
   const { user } = UseAuth();
 
-  // ✅ Load policy using React Query
   const { data: policy, isLoading: policyLoading } = useQuery({
     queryKey: ["policy", policyId],
     enabled: !!policyId,
@@ -33,19 +32,20 @@ const ApplicationForm = () => {
     const applicationData = {
       ...data,
       policyId,
-      policyName: policy?.title || "", 
-      basePremium:policy?.basePremium,
-      duration:policy?.durationOptions,
+      policyName: policy?.title || "",
+      basePremium: policy?.basePremium,
+      duration: policy?.durationOptions,
       email: user.email,
       name: user.displayName,
       status: "Pending",
+      paymentStatus: "Due", // ✅ newly added
       createdAt: new Date(),
     };
 
     try {
       await axiosSecure.post("/applications", applicationData);
       toast.success("Application submitted successfully!");
-      navigate("/"); // redirect to homepage or success page
+      navigate("/");
     } catch (error) {
       console.error(error);
       toast.warn("Failed to submit application.");
@@ -120,6 +120,22 @@ const ApplicationForm = () => {
             className="w-full border p-2 rounded"
           />
           {errors.nid && <p className="text-red-500">{errors.nid.message}</p>}
+        </div>
+
+        {/* ✅ Payment Frequency */}
+        <div>
+          <label>Payment Frequency</label>
+          <select
+            {...register("paymentFrequency", { required: "Please select frequency" })}
+            className="w-full border p-2 rounded"
+          >
+            <option value="">Select Option</option>
+            <option value="monthly">Monthly</option>
+            <option value="yearly">Yearly</option>
+          </select>
+          {errors.paymentFrequency && (
+            <p className="text-red-500">{errors.paymentFrequency.message}</p>
+          )}
         </div>
 
         {/* Nominee Info */}

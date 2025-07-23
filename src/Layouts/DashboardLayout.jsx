@@ -8,6 +8,7 @@ import {
   FaTasks,
   FaUserCheck,
   FaBlog,
+  FaCreditCard,
 } from "react-icons/fa";
 import LifeSecure from "../Components/lifeSecure";
 import useUserRole from "../hooks/UseUserRole";
@@ -136,6 +137,17 @@ const DashboardLayout = () => {
       <FaUserCheck className="text-lg" />
       <span>My Applications</span>
     </Link>
+    <Link
+  to="/dashboard/payment-status"
+  className={`flex items-center gap-3 px-4 py-2 rounded-lg transition ${
+    isActive("payment-status")
+      ? "bg-gray-100 border-l-4 border-primary font-semibold"
+      : "hover:bg-gray-50"
+  }`}
+ >
+  <FaCreditCard className="text-lg" />
+  <span>Payment Status</span>
+ </Link>
    </>
   )}
         </nav>
