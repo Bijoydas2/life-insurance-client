@@ -148,6 +148,17 @@ const DashboardLayout = () => {
   <FaCreditCard className="text-lg" />
   <span>Payment Status</span>
  </Link>
+      <Link
+        to="/dashboard/claim-request"
+        className={`flex items-center gap-3 px-4 py-2 rounded-lg transition ${
+          isActive("claim-request")
+            ? "bg-gray-100 border-l-4 border-primary font-semibold"
+            : "hover:bg-gray-50"
+        }`}
+      >
+        <FaFileAlt className="text-lg" />
+        <span>Claim Request</span>
+      </Link>
    </>
   )}
         </nav>

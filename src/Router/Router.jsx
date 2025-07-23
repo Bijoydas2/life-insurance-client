@@ -21,6 +21,7 @@ import ManageBlogs from "../Pages/Dashboard/AdminAndCustomerPanel/ManageBlogs";
 import MyPoliciesApplication from "../Pages/Dashboard/CustomerDashboard/MyPolicies/MyPolicesApplication";
 import PaymentStatus from "../Pages/Dashboard/CustomerDashboard/PaymentStatus/PaymentStatus";
 import Payment from "../Pages/Dashboard/CustomerDashboard/Payment/Payment";
+import ClaimRequestPage from "../Pages/Dashboard/CustomerDashboard/ClaimRequest/ClaimRequestPage";
 
 
 
@@ -113,8 +114,14 @@ export const router = createBrowserRouter([
       Component:PaymentStatus,
     },
     {
-        path: 'payment', 
-        Component: Payment
+      path: 'payment', 
+      Component: Payment
+      
+      },
+    {
+      path: 'claim-request', 
+      Component: ClaimRequestPage
+
       },
    
   ]
