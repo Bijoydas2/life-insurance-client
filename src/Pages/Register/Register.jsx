@@ -120,7 +120,7 @@ const Register = () => {
               type="text"
               {...register("name", { required: "Name is required" })}
               placeholder="Enter Your Name"
-              className="w-full px-4 py-2 border text-gray-700 border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#0A7EA4]"
+              className="w-full px-4 py-2 border text-gray-700 border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
             />
             {errors.name && (
               <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>
@@ -135,7 +135,7 @@ const Register = () => {
               type="email"
               {...register("email", { required: "Email is required" })}
               placeholder="Enter Your Email"
-              className="w-full px-4 py-2 border text-gray-700 border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#0A7EA4]"
+              className="w-full px-4 py-2 border text-gray-700 border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
             />
             {errors.email && (
               <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>
@@ -150,7 +150,7 @@ const Register = () => {
               type="password"
               {...register("password", { required: "Password is required" })}
               placeholder="Password"
-              className="w-full px-4 py-2 border text-gray-700 border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#0A7EA4]"
+              className="w-full px-4 py-2 border text-gray-700 border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
             />
             <p className="text-xs text-gray-500 mt-1">
               Min 6 chars, 1 uppercase, 1 lowercase

@@ -23,6 +23,7 @@ import PaymentStatus from "../Pages/Dashboard/CustomerDashboard/PaymentStatus/Pa
 import Payment from "../Pages/Dashboard/CustomerDashboard/Payment/Payment";
 import ClaimRequestPage from "../Pages/Dashboard/CustomerDashboard/ClaimRequest/ClaimRequestPage";
 import PolicyClearancePage from "../Pages/Dashboard/AgentDashboard/PolicyClearancePage";
+import ProfilePage from "../Pages/ProfilePage/ProfilePage";
 
 
 
@@ -58,7 +59,11 @@ export const router = createBrowserRouter([
        {
        path: "/blogs/:id",
        element:<PrivateRoute><BlogDetailsPage/></PrivateRoute>
-       }  
+       },
+       {
+        path:'/Profile',
+        Component:ProfilePage
+       } 
     ]
   },
    {

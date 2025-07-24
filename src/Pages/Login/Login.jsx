@@ -41,7 +41,7 @@ const Login = () => {
       </div>
 
       <div className="bg-white shadow-2xl rounded-xl p-8 w-full max-w-md md:ml-10">
-        <h2 className="text-3xl font-bold text-center text-[#0A7EA4] mb-6">Login to Insurance Portal</h2>
+        <h2 className="text-3xl font-bold text-center text-primary mb-6">Login to Insurance Portal</h2>
 
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           <div>
@@ -53,7 +53,7 @@ const Login = () => {
               type="email"
               {...register('email', { required: 'Email is required' })}
               placeholder="Enter your email"
-              className="w-full px-4 py-2 border text-gray-700 border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#0A7EA4]"
+              className="w-full px-4 py-2 border text-gray-700 border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
             />
             {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>}
           </div>
@@ -67,14 +67,14 @@ const Login = () => {
               type="password"
               {...register('password', { required: 'Password is required' })}
               placeholder="Enter your password"
-              className="w-full px-4 py-2 border text-gray-700 border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#0A7EA4]"
+              className="w-full px-4 py-2 border text-gray-700 border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
             />
             {errors.password && <p className="text-red-500 text-sm mt-1">{errors.password.message}</p>}
           </div>
 
           <button
             type="submit"
-            className="w-full bg-[#0A7EA4] text-white py-2 rounded-md hover:bg-[#095b78] transition-all duration-200"
+            className="w-full bg-primary text-white py-2 rounded-md hover:bg-primary/80 transition-all duration-200"
           >
             Login
           </button>
@@ -86,7 +86,7 @@ const Login = () => {
 
         <p className="text-center text-gray-600 text-sm mt-6">
           Don&apos;t have an account?{' '}
-          <Link to="/register" className="text-[#0A7EA4] hover:underline font-medium">
+          <Link to="/register" className="text-primary hover:underline font-medium">
             Register here
           </Link>
         </p>
