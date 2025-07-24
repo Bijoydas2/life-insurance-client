@@ -9,6 +9,7 @@ import {
   FaUserCheck,
   FaBlog,
   FaCreditCard,
+  FaClipboardCheck,
 } from "react-icons/fa";
 import LifeSecure from "../Components/lifeSecure";
 import useUserRole from "../hooks/UseUserRole";
@@ -120,6 +121,17 @@ const DashboardLayout = () => {
                <FaBlog className="text-lg" />
               <span>Manage Blogs</span>
             </Link>
+            <Link
+             to="/dashboard/policy-clearance"
+             className={`flex items-center gap-3 px-4 py-2 rounded-lg transition ${
+             isActive("policy-clearance")
+              ? "bg-gray-100 border-l-4 border-primary font-semibold"
+               : "hover:bg-gray-50"
+               }`}
+                  >
+              <FaClipboardCheck className="text-lg" />
+                <span>Policy Clearance</span>
+                </Link>
             </>
           )}
 

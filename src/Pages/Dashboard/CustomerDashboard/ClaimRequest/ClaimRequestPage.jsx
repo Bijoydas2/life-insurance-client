@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import Swal from "sweetalert2";
-import { Link, useLocation } from "react-router";
-import { FaFileAlt, FaCreditCard } from "react-icons/fa";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import UseAuth from "../../../../hooks/UseAuth";
 import UseAxios from "../../../../hooks/UseAxios";
@@ -10,14 +8,15 @@ import UseAxios from "../../../../hooks/UseAxios";
 const ClaimRequestPage = () => {
   const axiosSecure = useAxiosSecure();
   const { user } = UseAuth();
-  const location = useLocation();
-  const axiosInstance =UseAxios();
-  const isActive = (path) => location.pathname.includes(path);
-
+  const axiosInstance = UseAxios();
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedPolicy, setSelectedPolicy] = useState(null);
   const [fileUploading, setFileUploading] = useState(false);
 
-  const { data: approvedPolicies = [], refetch } = useQuery({
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
+
+  const { data: approvedPolicies = [] } = useQuery({
     queryKey: ["approvedPolicies", user?.email],
     queryFn: async () => {
       const res = await axiosSecure.get(`/applications/approved?email=${user?.email}`);
@@ -26,7 +25,7 @@ const ClaimRequestPage = () => {
     enabled: !!user?.email,
   });
 
-  const { data: claims = [] } = useQuery({
+  const { data: claims = [], refetch } = useQuery({
     queryKey: ["myClaims", user?.email],
     queryFn: async () => {
       const res = await axiosSecure.get(`/claims?email=${user?.email}`);
@@ -56,6 +55,7 @@ const ClaimRequestPage = () => {
         policyId: selectedPolicy._id,
         policyName: selectedPolicy.policyName,
         reason,
+        amount: selectedPolicy.basePremium,
         documentUrl,
         status: "pending",
         claimDate: new Date(),
@@ -66,6 +66,7 @@ const ClaimRequestPage = () => {
         Swal.fire("Success!", "Your claim has been submitted.", "success");
         refetch();
         setSelectedPolicy(null);
+        closeModal();
       } else {
         Swal.fire("Error", "Failed to submit claim. Try again.", "error");
       }
@@ -76,11 +77,17 @@ const ClaimRequestPage = () => {
     }
   };
 
+  const handleApprovedClick = (policyName) => {
+    Swal.fire({
+      title: "Claim Approved",
+      text: `Your claim for policy \"${policyName}\" has been approved!`,
+      icon: "success",
+      confirmButtonText: "OK",
+    });
+  };
+
   return (
     <div className="flex max-w-7xl mx-auto p-6 gap-8 min-h-screen">
-     
-
-      {/* Main content */}
       <main className="flex-1 bg-white rounded-lg p-8 shadow-md">
         <h2 className="text-3xl font-semibold text-primary mb-8 border-b border-gray-300 pb-2">
           Claim Request
@@ -101,24 +108,35 @@ const ClaimRequestPage = () => {
               >
                 <div>
                   <h3 className="text-xl font-semibold text-primary">{policy.policyName}</h3>
+                  <div>{policy.basePremium}</div>
                   {existingClaim ? (
                     <p className="mt-3 text-sm font-medium text-primary">
                       Claim Status:{" "}
-                      <span
-                        className={`capitalize ${
-                          existingClaim.status === "approved"
-                            ? "text-green-600"
-                            : existingClaim.status === "pending"
-                            ? "text-yellow-600"
-                            : "text-red-600"
-                        }`}
-                      >
-                        {existingClaim.status}
-                      </span>
+                      {existingClaim.status === "approved" ? (
+                        <button
+                          onClick={() => handleApprovedClick(policy.policyName)}
+                          className="px-3 py-1 bg-green-600 text-white rounded hover:bg-green-700 transition"
+                        >
+                          Approved
+                        </button>
+                      ) : (
+                        <span
+                          className={`capitalize ${
+                            existingClaim.status === "pending"
+                              ? "text-yellow-600"
+                              : "text-red-600"
+                          }`}
+                        >
+                          {existingClaim.status}
+                        </span>
+                      )}
                     </p>
                   ) : (
                     <button
-                      onClick={() => setSelectedPolicy(policy)}
+                      onClick={() => {
+                        setSelectedPolicy(policy);
+                        openModal();
+                      }}
                       className="mt-4 px-5 py-2 bg-primary text-white rounded-md shadow hover:bg-secondary transition"
                     >
                       Claim
@@ -130,49 +148,50 @@ const ClaimRequestPage = () => {
           })}
         </div>
 
-        {/* Claim submission form */}
-        {selectedPolicy && (
-          <div className="mt-10 max-w-md bg-primary/5 p-8 rounded-lg shadow-lg">
-            <h3 className="text-2xl font-bold mb-6 text-primary">
-              Submit Claim for: {selectedPolicy.policyName}
-            </h3>
-            <form onSubmit={handleClaimSubmit} className="space-y-5">
-              <input
+        {isModalOpen && selectedPolicy && (
+          <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
+            <div className="bg-white rounded-lg p-6 w-full max-w-md">
+              <h2 className="text-xl text-primary font-semibold mb-4">Submit Claim for: {selectedPolicy.policyName}</h2>
+              <form onSubmit={handleClaimSubmit} className="space-y-5">
+                <input
                 type="text"
                 value={selectedPolicy.policyName}
                 readOnly
                 className="input input-bordered w-full bg-white text-gray-700 font-semibold"
               />
-              <textarea
-                name="reason"
-                placeholder="Reason for claim"
-                required
-                className="textarea textarea-bordered bg-white w-full resize-none text-gray-700"
-              />
-              <input
-                type="file"
-                name="document"
-               
-                required
-                className="file-input text-gray-700  bg-white file-input-bordered w-full cursor-pointer"
-              />
-              <div className="flex justify-between gap-4">
-                <button
-                  type="submit"
-                  className="btn bg-primary border-0 hover:bg-secondary text-white flex-1"
-                  disabled={fileUploading}
-                >
-                  {fileUploading ? "Submitting..." : "Submit Claim"}
-                </button>
-                <button
-                  type="button"
-                  className="btn bg-secondary border-0 text-white hover:bg-primary/10 flex-1"
-                  onClick={() => setSelectedPolicy(null)}
-                >
-                  Cancel
-                </button>
-              </div>
-            </form>
+                <textarea
+                  name="reason"
+                  placeholder="Reason for claim"
+                  required
+                  className="textarea textarea-bordered bg-white w-full resize-none text-gray-700"
+                />
+                <input
+                  type="file"
+                  name="document"
+                  required
+                  className="file-input text-gray-700 bg-white file-input-bordered w-full cursor-pointer"
+                />
+                <div className="flex justify-end gap-4">
+                  <button
+                    type="submit"
+                    className="btn bg-primary border-0 hover:bg-secondary text-white flex-1"
+                    disabled={fileUploading}
+                  >
+                    {fileUploading ? "Submitting..." : "Submit Claim"}
+                  </button>
+                  <button
+                    type="button"
+                    className="btn bg-secondary border-0 text-white hover:bg-primary/10 flex-1"
+                    onClick={() => {
+                      closeModal();
+                      setSelectedPolicy(null);
+                    }}
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </form>
+            </div>
           </div>
         )}
       </main>

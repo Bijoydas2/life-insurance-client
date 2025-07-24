@@ -22,6 +22,7 @@ import MyPoliciesApplication from "../Pages/Dashboard/CustomerDashboard/MyPolici
 import PaymentStatus from "../Pages/Dashboard/CustomerDashboard/PaymentStatus/PaymentStatus";
 import Payment from "../Pages/Dashboard/CustomerDashboard/Payment/Payment";
 import ClaimRequestPage from "../Pages/Dashboard/CustomerDashboard/ClaimRequest/ClaimRequestPage";
+import PolicyClearancePage from "../Pages/Dashboard/AgentDashboard/PolicyClearancePage";
 
 
 
@@ -103,6 +104,10 @@ export const router = createBrowserRouter([
     {
       path:'assigned',
       Component:AssignedCustomers
+    },
+    {
+      path:'policy-clearance',
+      Component:PolicyClearancePage,
     },
     // customer panel
     {

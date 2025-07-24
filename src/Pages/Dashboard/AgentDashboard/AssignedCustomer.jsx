@@ -5,14 +5,12 @@ import UseAuth from '../../../hooks/UseAuth';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-
 const AssignedCustomers = () => {
   const axiosSecure = useAxiosSecure();
   const { user } = UseAuth();
   const queryClient = useQueryClient();
   const [selectedApp, setSelectedApp] = useState(null);
 
-  // ✅ Fetch applications assigned to this agent
   const { data: applications = [], isLoading } = useQuery({
     queryKey: ['assignedApplications', user?.email],
     queryFn: async () => {
@@ -22,7 +20,6 @@ const AssignedCustomers = () => {
     enabled: !!user?.email
   });
 
-  // ✅ Mutation to update application status
   const mutation = useMutation({
     mutationFn: async ({ appId, status, policyId }) => {
       return axiosSecure.patch(`/applications/status/${appId}`, {
@@ -49,9 +46,9 @@ const AssignedCustomers = () => {
     <div className="p-4">
       <h2 className="text-2xl font-semibold mb-4 text-primary">Assigned Customers</h2>
       <div className="overflow-x-auto">
-        <table className="table table-zebra w-full">
+        <table className="table w-full">
           <thead className="bg-secondary text-white">
-            <tr >
+            <tr>
               <th>#</th>
               <th>Customer Name</th>
               <th>Email</th>
@@ -62,28 +59,31 @@ const AssignedCustomers = () => {
           </thead>
           <tbody>
             {applications.map((app, idx) => (
-              <tr key={app._id} className="bg-gray-50  transition">
-                <td className='text-gray-700'>{idx + 1}</td>
-                <td className='text-gray-700'>{app.name}</td>
-                <td className='text-gray-700'>{app.email}</td>
+              <tr
+                key={app._id}
+                className='bg-white text-gray-700'
+              >
+                <td>{idx + 1}</td>
+                <td>{app.name}</td>
+                <td>{app.email}</td>
                 <td className='text-primary'>{app.policyName}</td>
                 <td>
-    <select
-    value={app.status}
-    onChange={(e) => handleStatusChange(app._id, app.policyId, e.target.value)}
-    className={`select select-bordered select-sm font-semibold ${
-      app.status === 'Approved'
-        ? 'bg-green-100 text-green-700'
-        : app.status === 'Rejected'
-        ? 'bg-red-100 text-red-700'
-        : 'bg-yellow-100 text-yellow-700'
-       }`}
-     >
-    <option value="Pending">Pending</option>
-    <option value="Approved">Approved</option>
-    <option value="Rejected">Rejected</option>
-    </select>
-    </td>
+                  <select
+                    value={app.status}
+                    onChange={(e) => handleStatusChange(app._id, app.policyId, e.target.value)}
+                    className={`select select-bordered select-sm font-semibold ${
+                      app.status === 'Approved'
+                        ? 'bg-green-100 text-green-700'
+                        : app.status === 'Rejected'
+                        ? 'bg-red-100 text-red-700'
+                        : 'bg-yellow-100 text-yellow-700'
+                    }`}
+                  >
+                    <option value="Pending">Pending</option>
+                    <option value="Approved">Approved</option>
+                    <option value="Rejected">Rejected</option>
+                  </select>
+                </td>
                 <td>
                   <button
                     className="btn btn-sm bg-primary border-none text-white hover:bg-primary-focus"
@@ -102,12 +102,11 @@ const AssignedCustomers = () => {
         )}
       </div>
 
-      {/* ✅ View Details Modal */}
       {selectedApp && (
         <dialog open className="modal modal-bottom sm:modal-middle">
-          <div className="modal-box">
+          <div className="modal-box bg-white">
             <h3 className="font-bold text-2xl mb-3 text-primary">Application Details</h3>
-            <div className="space-y-1 text-white">
+            <div className="space-y-1  text-gray-700">
               <p><strong>Name:</strong> {selectedApp.name}</p>
               <p><strong>Email:</strong> {selectedApp.email}</p>
               <p><strong>Address:</strong> {selectedApp.address}</p>
@@ -122,7 +121,7 @@ const AssignedCustomers = () => {
 
             <div className="modal-action">
               <button
-                className="btn bg-secondary  text-white hover:bg-secondary-focus"
+                className="btn bg-secondary border-0 text-white hover:bg-secondary-focus"
                 onClick={() => setSelectedApp(null)}
               >
                 Close
