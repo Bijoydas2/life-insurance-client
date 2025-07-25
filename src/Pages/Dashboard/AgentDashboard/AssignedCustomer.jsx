@@ -4,6 +4,7 @@ import useAxiosSecure from '../../../hooks/useAxiosSecure';
 import UseAuth from '../../../hooks/UseAuth';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Loading from '../../../Components/Loading';
 
 const AssignedCustomers = () => {
   const axiosSecure = useAxiosSecure();
@@ -40,7 +41,7 @@ const AssignedCustomers = () => {
     mutation.mutate({ appId, status, policyId });
   };
 
-  if (isLoading) return <p className="text-center mt-10 text-gray-500">Loading...</p>;
+  if (isLoading) return <Loading/>;
 
   return (
     <div className="p-4">

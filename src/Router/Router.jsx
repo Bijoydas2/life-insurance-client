@@ -24,6 +24,9 @@ import Payment from "../Pages/Dashboard/CustomerDashboard/Payment/Payment";
 import ClaimRequestPage from "../Pages/Dashboard/CustomerDashboard/ClaimRequest/ClaimRequestPage";
 import PolicyClearancePage from "../Pages/Dashboard/AgentDashboard/PolicyClearancePage";
 import ProfilePage from "../Pages/ProfilePage/ProfilePage";
+import AdminRoute from "../Route/AdminRoute";
+import AgentRoute from "../Route/AgentRoute";
+import DashboardHome from "../Pages/Dashboard/DashboardHome/DashboardHome";
 
 
 
@@ -85,20 +88,26 @@ export const router = createBrowserRouter([
     element: <PrivateRoute><DashboardLayout /></PrivateRoute>,
      children: [
     {
+    index:true,
+    Component:DashboardHome
+
+    },
+      // admin
+    {
       path: 'applications',
-      Component: ManageApplications,
+      element:<AdminRoute><ManageApplications/></AdminRoute>
     },
     {
       path: 'users',
-      Component: ManageUsers,
+       element:<AdminRoute><ManageUsers/></AdminRoute>
     },
     {
       path: 'policies',
-      Component: ManagePolicies,
+       element:<AdminRoute><ManagePolicies/></AdminRoute>
     },
     {
       path: 'transactions',
-      Component: ManageTransactions,
+      element:<AdminRoute><ManageTransactions/></AdminRoute>
     },
     // agent and admin panel
      {
@@ -108,11 +117,11 @@ export const router = createBrowserRouter([
     // agent panel
     {
       path:'assigned',
-      Component:AssignedCustomers
+      element:<AgentRoute><AssignedCustomers/></AgentRoute>
     },
     {
       path:'policy-clearance',
-      Component:PolicyClearancePage,
+      element:<AgentRoute><PolicyClearancePage/></AgentRoute>
     },
     // customer panel
     {

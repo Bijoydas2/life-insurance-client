@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, Outlet, useLocation } from "react-router";
+import { NavLink, Outlet } from "react-router";
 import {
   FaClipboardList,
   FaUserShield,
@@ -10,19 +10,25 @@ import {
   FaBlog,
   FaCreditCard,
   FaClipboardCheck,
+  FaHome,
 } from "react-icons/fa";
 import LifeSecure from "../Components/lifeSecure";
 import useUserRole from "../hooks/UseUserRole";
-import Loading from '../Components/Loading'
 
 
 const DashboardLayout = () => {
-  const location = useLocation();
-  const { role, isLoading } =useUserRole();
- console.log("DashboardLayout Role:", role, "Loading:", isLoading);
-  const isActive = (path) => location.pathname.includes(path);
   
-  
+  const { role, isLoading } = useUserRole();
+  console.log("DashboardLayout Role:", role, "Loading:", isLoading);
+
+  // helper for active className (optional but recommended)
+  const navLinkClass = ({ isActive }) =>
+    `flex items-center gap-3 px-4 py-2 rounded-lg transition ${
+      isActive
+        ? "bg-gray-100 border-l-4 border-primary font-semibold"
+        : "hover:bg-gray-50"
+    }`;
+
   return (
     <div className="min-h-screen flex bg-gray-100">
       {/* Sidebar */}
@@ -34,145 +40,95 @@ const DashboardLayout = () => {
         <nav className="space-y-3 mt-10">
           {!isLoading && role === "admin" && (
             <>
-             <h2 className="text-2xl font-bold mb-10 text-primary tracking-wide">Admin Panel</h2>
-              <Link
-                to="/dashboard/applications"
-                className={`flex items-center gap-3 px-4 py-2 rounded-lg transition ${
-                  isActive("applications")
-                    ? "bg-gray-100 border-l-4 border-primary font-semibold"
-                    : "hover:bg-gray-50"
-                }`}
-              >
+              <h2 className="text-2xl font-bold mb-10 text-primary tracking-wide">
+                Admin Panel
+              </h2>
+
+              <NavLink to="/dashboard" end className={navLinkClass}>
+                <FaHome className="text-lg" />
+                <span>Home</span>
+              </NavLink>
+
+              <NavLink to="/dashboard/applications" className={navLinkClass}>
                 <FaClipboardList className="text-lg" />
                 <span>Manage Applications</span>
-              </Link>
+              </NavLink>
 
-              <Link
-                to="/dashboard/users"
-                className={`flex items-center gap-3 px-4 py-2 rounded-lg transition ${
-                  isActive("users")
-                    ? "bg-gray-100 border-l-4 border-primary font-semibold"
-                    : "hover:bg-gray-50"
-                }`}
-              >
+              <NavLink to="/dashboard/users" className={navLinkClass}>
                 <FaUserShield className="text-lg" />
                 <span>Manage Users</span>
-              </Link>
+              </NavLink>
 
-              <Link
-                to="/dashboard/policies"
-                className={`flex items-center gap-3 px-4 py-2 rounded-lg transition ${
-                  isActive("policies")
-                    ? "bg-gray-100 border-l-4 border-primary font-semibold"
-                    : "hover:bg-gray-50"
-                }`}
-              >
+              <NavLink to="/dashboard/policies" className={navLinkClass}>
                 <FaFileAlt className="text-lg" />
                 <span>Manage Policies</span>
-              </Link>
-               <Link
-              to="/dashboard/blogs"
-              className={`flex items-center gap-3 px-4 py-2 rounded-lg transition ${
-                isActive("blogs")
-                  ? "bg-gray-100 border-l-4 border-primary font-semibold"
-                  : "hover:bg-gray-50"
-              }`}
-            >
-               <FaBlog className="text-lg" />
-              <span>Manage Blogs</span>
-            </Link>
+              </NavLink>
 
-              <Link
-                to="/dashboard/transactions"
-                className={`flex items-center gap-3 px-4 py-2 rounded-lg transition ${
-                  isActive("transactions")
-                    ? "bg-gray-100 border-l-4 border-primary font-semibold"
-                    : "hover:bg-gray-50"
-                }`}
-              >
+              <NavLink to="/dashboard/blogs" className={navLinkClass}>
+                <FaBlog className="text-lg" />
+                <span>Manage Blogs</span>
+              </NavLink>
+
+              <NavLink to="/dashboard/transactions" className={navLinkClass}>
                 <FaMoneyBill className="text-lg" />
                 <span>Manage Transactions</span>
-              </Link>
+              </NavLink>
             </>
           )}
 
           {role === "agent" && (
             <>
-              <h2 className="text-2xl font-bold mb-10 text-primary tracking-wide">Agent Panel</h2>
-            <Link
-              to="/dashboard/assigned"
-              className={`flex items-center gap-3 px-4 py-2 rounded-lg transition ${
-                isActive("assigned")
-                  ? "bg-gray-100 border-l-4 border-primary font-semibold"
-                  : "hover:bg-gray-50"
-              }`}
-            >
-              <FaTasks className="text-lg" />
-              <span>Assigned Customer</span>
-            </Link>
-            <Link
-              to="/dashboard/blogs"
-              className={`flex items-center gap-3 px-4 py-2 rounded-lg transition ${
-                isActive("blogs")
-                  ? "bg-gray-100 border-l-4 border-primary font-semibold"
-                  : "hover:bg-gray-50"
-              }`}
-            >
-               <FaBlog className="text-lg" />
-              <span>Manage Blogs</span>
-            </Link>
-            <Link
-             to="/dashboard/policy-clearance"
-             className={`flex items-center gap-3 px-4 py-2 rounded-lg transition ${
-             isActive("policy-clearance")
-              ? "bg-gray-100 border-l-4 border-primary font-semibold"
-               : "hover:bg-gray-50"
-               }`}
-                  >
-              <FaClipboardCheck className="text-lg" />
+              <h2 className="text-2xl font-bold mb-10 text-primary tracking-wide">
+                Agent Panel
+              </h2>
+               <NavLink to="/dashboard" end className={navLinkClass}>
+                <FaHome className="text-lg" />
+                <span>Home</span>
+              </NavLink>
+
+              <NavLink to="/dashboard/assigned" className={navLinkClass}>
+                <FaTasks className="text-lg" />
+                <span>Assigned Customer</span>
+              </NavLink>
+
+              <NavLink to="/dashboard/blogs" className={navLinkClass}>
+                <FaBlog className="text-lg" />
+                <span>Manage Blogs</span>
+              </NavLink>
+
+              <NavLink to="/dashboard/policy-clearance" className={navLinkClass}>
+                <FaClipboardCheck className="text-lg" />
                 <span>Policy Clearance</span>
-                </Link>
+              </NavLink>
             </>
           )}
 
-       {role ==='customer' && (
-   <>
-    <h2 className="text-2xl font-bold mb-5 text-primary tracking-wide">Customer Panel</h2>
-    <Link
-      to="/dashboard/my-applications"
-      className={`flex items-center gap-3 px-4 py-2 rounded-lg transition ${
-        isActive("my-applications")
-          ? "bg-gray-100 border-l-4 border-primary font-semibold"
-          : "hover:bg-gray-50"
-      }`}
-    >
-      <FaUserCheck className="text-lg" />
-      <span>My Applications</span>
-    </Link>
-    <Link
-  to="/dashboard/payment-status"
-  className={`flex items-center gap-3 px-4 py-2 rounded-lg transition ${
-    isActive("payment-status")
-      ? "bg-gray-100 border-l-4 border-primary font-semibold"
-      : "hover:bg-gray-50"
-  }`}
- >
-  <FaCreditCard className="text-lg" />
-  <span>Payment Status</span>
- </Link>
-      <Link
-        to="/dashboard/claim-request"
-        className={`flex items-center gap-3 px-4 py-2 rounded-lg transition ${
-          isActive("claim-request")
-            ? "bg-gray-100 border-l-4 border-primary font-semibold"
-            : "hover:bg-gray-50"
-        }`}
-      >
-        <FaFileAlt className="text-lg" />
-        <span>Claim Request</span>
-      </Link>
-   </>
-  )}
+          {role === "customer" && (
+            <>
+              <h2 className="text-2xl font-bold mb-5 text-primary tracking-wide">
+                Customer Panel
+              </h2>
+               <NavLink to="/dashboard" end className={navLinkClass}>
+                <FaHome className="text-lg" />
+                <span>Home</span>
+              </NavLink>
+
+              <NavLink to="/dashboard/my-applications" className={navLinkClass}>
+                <FaUserCheck className="text-lg" />
+                <span>My Applications</span>
+              </NavLink>
+
+              <NavLink to="/dashboard/payment-status" className={navLinkClass}>
+                <FaCreditCard className="text-lg" />
+                <span>Payment Status</span>
+              </NavLink>
+
+              <NavLink to="/dashboard/claim-request" className={navLinkClass}>
+                <FaFileAlt className="text-lg" />
+                <span>Claim Request</span>
+              </NavLink>
+            </>
+          )}
         </nav>
       </aside>
 
