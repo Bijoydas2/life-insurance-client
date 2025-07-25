@@ -3,8 +3,7 @@ import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import { useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 
-
-const PolicyRow = ({ policy,index, onEdit }) => {
+const PolicyRow = ({ policy, index, onEdit }) => {
   const axiosSecure = useAxiosSecure();
   const queryClient = useQueryClient();
 
@@ -23,18 +22,18 @@ const PolicyRow = ({ policy,index, onEdit }) => {
   };
 
   return (
-    <tr className="text-gray-700">
-      <td>{index + 1}</td>
-      <td className="text-primary">{policy.title}</td>
-      <td>{policy.category}</td>
-      <td>{policy.minAge}</td>
-      <td>{policy.maxAge}</td>
-      <td>{policy.basePremium}</td>
-      <td className="space-x-2">
-        <button onClick={() => onEdit(policy)} className="btn btn-sm btn-warning">
+    <tr className="text-gray-700 text-xs sm:text-sm md:text-base">
+      <td className="whitespace-nowrap px-1 sm:px-2 py-1">{index + 1}</td>
+      <td className="text-primary whitespace-nowrap px-1 sm:px-2 py-1">{policy.title}</td>
+      <td className="whitespace-nowrap px-1 sm:px-2 py-1">{policy.category}</td>
+      <td className="whitespace-nowrap px-1 sm:px-2 py-1">{policy.minAge}</td>
+      <td className="whitespace-nowrap px-1 sm:px-2 py-1">{policy.maxAge}</td>
+      <td className="whitespace-nowrap px-1 sm:px-2 py-1">{policy.basePremium}</td>
+      <td className="whitespace-nowrap space-x-1 sm:space-x-2 px-1 sm:px-2 py-1 flex flex-wrap items-center gap-1">
+        <button onClick={() => onEdit(policy)} className="btn btn-xs sm:btn-sm btn-warning">
           Edit
         </button>
-        <button onClick={handleDelete} className="btn btn-sm btn-error">
+        <button onClick={handleDelete} className="btn btn-xs sm:btn-sm btn-error">
           Delete
         </button>
       </td>

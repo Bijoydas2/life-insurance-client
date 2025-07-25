@@ -11,7 +11,7 @@ const BlogFormModal = ({ blog, setIsModalOpen, refetch }) => {
   const axiosSecure = useAxiosSecure();
   const [loading, setLoading] = useState(false);
   const [uploading, setUploading] = useState(false);
-   const [profilePic, setProfilePic] = useState("");
+  const [profilePic, setProfilePic] = useState(blog?.image || "");
 
   const {
     register,
@@ -26,6 +26,7 @@ const BlogFormModal = ({ blog, setIsModalOpen, refetch }) => {
       details: blog?.details || '',
       image: blog?.image || '',
     });
+    setProfilePic(blog?.image || "");
   }, [blog, reset]);
 
   const onSubmit = async (data) => {
@@ -33,6 +34,7 @@ const BlogFormModal = ({ blog, setIsModalOpen, refetch }) => {
 
     const payload = {
       ...data,
+      image: profilePic || data.image,  // ensure image updated from upload
       author: user.displayName,
       authorEmail: user.email.toLowerCase(),
       authorProfile: user.photoURL,
@@ -60,7 +62,6 @@ const BlogFormModal = ({ blog, setIsModalOpen, refetch }) => {
     }
   };
 
-
   const handleImageUpload = async (e) => {
     const image = e.target.files[0];
     if (!image) return;
@@ -72,7 +73,6 @@ const BlogFormModal = ({ blog, setIsModalOpen, refetch }) => {
 
     try {
       const imagUploadUrl = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_image_Upload_key}`;
-     console.log("API key:", import.meta.env.VITE_image_upload_key);
       const res = await axios.post(imagUploadUrl, formData);
       setProfilePic(res.data.data.url);
       toast.success("Image uploaded successfully!");
@@ -85,15 +85,15 @@ const BlogFormModal = ({ blog, setIsModalOpen, refetch }) => {
   };
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50">
-      <div className="bg-white rounded-lg shadow-xl w-full max-w-2xl max-h-[90vh] overflow-auto p-8">
-        <h3 className="text-3xl font-bold mb-6 text-primary">
+    <div className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50 px-4">
+      <div className="bg-white rounded-lg shadow-xl w-full max-w-2xl max-h-[90vh] overflow-auto p-6 sm:p-8">
+        <h3 className="text-2xl sm:text-3xl font-bold mb-6 text-primary text-center">
           {blog ? 'Edit Blog' : 'Add New Blog'}
         </h3>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
           {/* Title */}
-          <div className="mb-6">
-            <label htmlFor="title" className="block mb-2 font-semibold text-secondary">
+          <div>
+            <label htmlFor="title" className="block mb-2 font-semibold text-secondary text-sm sm:text-base">
               Title
             </label>
             <input
@@ -108,8 +108,8 @@ const BlogFormModal = ({ blog, setIsModalOpen, refetch }) => {
           </div>
 
           {/* Content */}
-          <div className="mb-6">
-            <label htmlFor="details" className="block mb-2 font-semibold text-secondary">
+          <div>
+            <label htmlFor="details" className="block mb-2 font-semibold text-secondary text-sm sm:text-base">
               Content
             </label>
             <textarea
@@ -123,16 +123,16 @@ const BlogFormModal = ({ blog, setIsModalOpen, refetch }) => {
             )}
           </div>
 
-        
-           <div className="mb-6">
-            <label className="block text-sm text-secondary font-medium mb-1">
+          {/* Image Upload */}
+          <div>
+            <label className="block mb-2 text-sm sm:text-base text-secondary font-medium">
               Profile Picture
             </label>
             <input
               type="file"
               accept="image/*"
               onChange={handleImageUpload}
-              className="w-full px-4 py-2 border  text-gray-700 bg-white   border-secondary focus:border-primary focus:ring-primary"
+              className="w-full px-3 py-2 border text-gray-700 bg-white border-secondary focus:border-primary focus:ring-primary rounded"
               disabled={uploading}
             />
             {uploading && (
@@ -142,14 +142,16 @@ const BlogFormModal = ({ blog, setIsModalOpen, refetch }) => {
               <img
                 src={profilePic}
                 alt="Profile Preview"
-                className="mt-2 w-24 h-24 object-cover  rounded-full border"
+                className="mt-3 w-24 h-24 object-cover rounded-full border"
               />
             )}
           </div>
 
-          
-          <div className="mb-6">
-            <label className="block mb-2 font-semibold text-secondary">Author Name</label>
+          {/* Author Name */}
+          <div>
+            <label className="block mb-2 font-semibold text-secondary text-sm sm:text-base">
+              Author Name
+            </label>
             <input
               type="text"
               value={user.displayName || ''}
@@ -158,9 +160,11 @@ const BlogFormModal = ({ blog, setIsModalOpen, refetch }) => {
             />
           </div>
 
-     
-          <div className="mb-6">
-            <label className="block mb-2 font-semibold text-secondary">Author Email</label>
+          {/* Author Email */}
+          <div>
+            <label className="block mb-2 font-semibold text-secondary text-sm sm:text-base">
+              Author Email
+            </label>
             <input
               type="text"
               value={user.email || ''}
@@ -169,11 +173,11 @@ const BlogFormModal = ({ blog, setIsModalOpen, refetch }) => {
             />
           </div>
 
-         
-          <div className="flex justify-end gap-4">
+          {/* Buttons */}
+          <div className="flex flex-col sm:flex-row justify-end gap-4">
             <button
               type="button"
-              className="btn btn-outline border-secondary text-secondary hover:bg-secondary hover:text-white"
+              className="btn btn-outline border-secondary text-secondary hover:bg-secondary hover:text-white w-full sm:w-auto"
               onClick={() => setIsModalOpen(false)}
               disabled={loading}
             >
@@ -181,7 +185,7 @@ const BlogFormModal = ({ blog, setIsModalOpen, refetch }) => {
             </button>
             <button
               type="submit"
-              className="btn bg-primary border-primary text-white hover:bg-primary/90"
+              className="btn bg-primary border-primary text-white hover:bg-primary/90 w-full sm:w-auto"
               disabled={loading}
             >
               {loading ? 'Saving...' : blog ? 'Update' : 'Publish'}

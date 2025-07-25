@@ -30,7 +30,7 @@ const AssignedCustomers = () => {
     },
     onSuccess: () => {
       toast.success('✅ Status updated successfully!', { theme: 'colored' });
-      queryClient.invalidateQueries(['assignedApplications']);
+      queryClient.invalidateQueries(['assignedApplications', user?.email]);
     },
     onError: () => {
       toast.error('❌ Failed to update status.', { theme: 'colored' });
@@ -41,38 +41,43 @@ const AssignedCustomers = () => {
     mutation.mutate({ appId, status, policyId });
   };
 
-  if (isLoading) return <Loading/>;
+  if (isLoading) return <Loading />;
 
   return (
-    <div className="p-4">
+    <div className="p-4 max-w-full">
       <h2 className="text-2xl font-semibold mb-4 text-primary">Assigned Customers</h2>
-      <div className="overflow-x-auto">
-        <table className="table w-full">
+
+      <div className="overflow-x-auto border border-gray-200 rounded-md shadow-sm">
+        <table className="table w-full min-w-[600px]">
           <thead className="bg-secondary text-white">
             <tr>
-              <th>#</th>
-              <th>Customer Name</th>
-              <th>Email</th>
-              <th>Policy</th>
-              <th>Status</th>
-              <th>Action</th>
+              <th className="whitespace-nowrap px-4 py-2">#</th>
+              <th className="whitespace-nowrap px-4 py-2">Customer Name</th>
+              <th className="whitespace-nowrap px-4 py-2">Email</th>
+              <th className="whitespace-nowrap px-4 py-2">Policy</th>
+              <th className="whitespace-nowrap px-4 py-2">Status</th>
+              <th className="whitespace-nowrap px-4 py-2">Action</th>
             </tr>
           </thead>
           <tbody>
+            {applications.length === 0 && (
+              <tr>
+                <td colSpan={6} className="text-center p-4 text-gray-500">
+                  No assigned customers found.
+                </td>
+              </tr>
+            )}
             {applications.map((app, idx) => (
-              <tr
-                key={app._id}
-                className='bg-white text-gray-700'
-              >
-                <td>{idx + 1}</td>
-                <td>{app.name}</td>
-                <td>{app.email}</td>
-                <td className='text-primary'>{app.policyName}</td>
-                <td>
+              <tr key={app._id} className="bg-white text-gray-700 hover:bg-gray-50 transition">
+                <td className="px-4 py-2 whitespace-nowrap">{idx + 1}</td>
+                <td className="px-4 py-2 whitespace-nowrap max-w-xs truncate">{app.name}</td>
+                <td className="px-4 py-2 whitespace-nowrap max-w-xs truncate">{app.email}</td>
+                <td className="text-primary px-4 py-2 whitespace-nowrap max-w-xs truncate">{app.policyName}</td>
+                <td className="px-4 py-2 whitespace-nowrap">
                   <select
                     value={app.status}
                     onChange={(e) => handleStatusChange(app._id, app.policyId, e.target.value)}
-                    className={`select select-bordered select-sm font-semibold ${
+                    className={`select select-bordered select-sm font-semibold w-full max-w-[140px] ${
                       app.status === 'Approved'
                         ? 'bg-green-100 text-green-700'
                         : app.status === 'Rejected'
@@ -85,9 +90,9 @@ const AssignedCustomers = () => {
                     <option value="Rejected">Rejected</option>
                   </select>
                 </td>
-                <td>
+                <td className="px-4 py-2 whitespace-nowrap">
                   <button
-                    className="btn btn-sm bg-primary border-none text-white hover:bg-primary-focus"
+                    className="btn btn-sm bg-primary border-none text-white hover:bg-primary-focus whitespace-nowrap"
                     onClick={() => setSelectedApp(app)}
                   >
                     View Details
@@ -97,17 +102,13 @@ const AssignedCustomers = () => {
             ))}
           </tbody>
         </table>
-
-        {applications.length === 0 && (
-          <p className="text-center mt-4 text-gray-500">No assigned customers found.</p>
-        )}
       </div>
 
       {selectedApp && (
         <dialog open className="modal modal-bottom sm:modal-middle">
-          <div className="modal-box bg-white">
+          <div className="modal-box bg-white max-w-md max-h-[80vh] overflow-y-auto">
             <h3 className="font-bold text-2xl mb-3 text-primary">Application Details</h3>
-            <div className="space-y-1  text-gray-700">
+            <div className="space-y-1 text-gray-700 text-sm sm:text-base">
               <p><strong>Name:</strong> {selectedApp.name}</p>
               <p><strong>Email:</strong> {selectedApp.email}</p>
               <p><strong>Address:</strong> {selectedApp.address}</p>
@@ -116,7 +117,7 @@ const AssignedCustomers = () => {
               <p><strong>Status:</strong> {selectedApp.status}</p>
               <p><strong>Nominee:</strong> {selectedApp.nomineeName}</p>
               <p><strong>Relationship:</strong> {selectedApp.relationship}</p>
-              <p><strong>Health Issues:</strong> {selectedApp.healthIssues?.join(', ')}</p>
+              <p><strong>Health Issues:</strong> {selectedApp.healthIssues?.join(', ') || 'None'}</p>
               <p><strong>Applied At:</strong> {new Date(selectedApp.createdAt).toLocaleString()}</p>
             </div>
 

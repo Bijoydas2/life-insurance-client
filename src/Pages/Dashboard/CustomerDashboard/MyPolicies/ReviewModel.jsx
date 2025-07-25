@@ -15,7 +15,7 @@ const ReviewModal = ({ policy, closeModal }) => {
 
   const handleRatingClick = (rating) => {
     setSelectedRating(rating);
-    setValue('rating', rating); 
+    setValue('rating', rating);
   };
 
   const onSubmit = async (data) => {
@@ -41,14 +41,16 @@ const ReviewModal = ({ policy, closeModal }) => {
   };
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
-      <div className="bg-white p-6 rounded w-full max-w-md">
-        <h3 className="text-2xl font-semibold text-center text-primary mb-4">Review: {policy.policyName}</h3>
-        <form onSubmit={handleSubmit(onSubmit)}>
+    <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50 p-4">
+      <div className="bg-white p-6 rounded w-full max-w-md max-h-[90vh] overflow-auto">
+        <h3 className="text-2xl font-semibold text-center text-primary mb-4">
+          Review: {policy.policyName}
+        </h3>
+        <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col">
           {/* Star Rating */}
           <div className="mb-4">
             <label className="block font-medium mb-1 text-secondary">Rating</label>
-            <div className="flex gap-2 text-yellow-500 text-2xl">
+            <div className="flex gap-2 text-yellow-500 text-3xl justify-center sm:justify-start">
               {[1, 2, 3, 4, 5].map((star) => (
                 <FaStar
                   key={star}
@@ -60,6 +62,7 @@ const ReviewModal = ({ policy, closeModal }) => {
                   onMouseEnter={() => setHoveredRating(star)}
                   onMouseLeave={() => setHoveredRating(0)}
                   onClick={() => handleRatingClick(star)}
+                  aria-label={`${star} star`}
                 />
               ))}
             </div>
@@ -71,17 +74,25 @@ const ReviewModal = ({ policy, closeModal }) => {
             <label className="block font-medium text-secondary mb-1">Feedback</label>
             <textarea
               {...register('feedback', { required: true })}
-              className="textarea textarea-bordered w-full"
+              className="textarea textarea-bordered w-full min-h-[100px]"
               placeholder="Share your experience..."
             />
           </div>
 
           {/* Buttons */}
-          <div className="flex justify-end gap-2">
-            <button type="button" className="btn btn-outline bg-secondary" onClick={closeModal}>
+          <div className="flex flex-col sm:flex-row justify-end gap-2">
+            <button
+              type="button"
+              className="btn btn-outline bg-secondary w-full sm:w-auto"
+              onClick={closeModal}
+            >
               Cancel
             </button>
-            <button type="submit" className="btn btn-primary" disabled={selectedRating === 0}>
+            <button
+              type="submit"
+              className="btn btn-primary w-full sm:w-auto"
+              disabled={selectedRating === 0}
+            >
               Submit
             </button>
           </div>

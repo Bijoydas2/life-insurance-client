@@ -39,7 +39,7 @@ const Register = () => {
 
     try {
       const imagUploadUrl = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_image_Upload_key}`;
-     console.log("API key:", import.meta.env.VITE_image_upload_key);
+    
       const res = await axios.post(imagUploadUrl, formData);
       setProfilePic(res.data.data.url);
       toast.success("Image uploaded successfully!");

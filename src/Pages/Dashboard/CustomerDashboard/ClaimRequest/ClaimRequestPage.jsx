@@ -80,20 +80,20 @@ const ClaimRequestPage = () => {
   const handleApprovedClick = (policyName) => {
     Swal.fire({
       title: "Claim Approved",
-      text: `Your claim for policy \"${policyName}\" has been approved!`,
+      text: `Your claim for policy "${policyName}" has been approved!`,
       icon: "success",
       confirmButtonText: "OK",
     });
   };
 
   return (
-    <div className="flex max-w-7xl mx-auto p-6 gap-8 min-h-screen">
-      <main className="flex-1 bg-white rounded-lg p-8 shadow-md">
+    <div className="max-w-7xl mx-auto p-6 min-h-screen">
+      <main className="bg-white rounded-lg p-6 shadow-md">
         <h2 className="text-3xl font-semibold text-primary mb-8 border-b border-gray-300 pb-2">
           Claim Request
         </h2>
 
-        <div className="grid md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {approvedPolicies.length === 0 && (
             <p className="text-gray-500 col-span-full text-center">
               No approved policies found.
@@ -108,7 +108,7 @@ const ClaimRequestPage = () => {
               >
                 <div>
                   <h3 className="text-xl font-semibold text-primary">{policy.policyName}</h3>
-                  <div>{policy.basePremium}</div>
+                  <div className="text-gray-700 font-medium">{policy.basePremium} ৳</div>
                   {existingClaim ? (
                     <p className="mt-3 text-sm font-medium text-primary">
                       Claim Status:{" "}
@@ -137,7 +137,7 @@ const ClaimRequestPage = () => {
                         setSelectedPolicy(policy);
                         openModal();
                       }}
-                      className="mt-4 px-5 py-2 bg-primary text-white rounded-md shadow hover:bg-secondary transition"
+                      className="mt-4 px-5 py-2 bg-primary text-white rounded-md shadow hover:bg-secondary transition w-full md:w-auto"
                     >
                       Claim
                     </button>
@@ -148,17 +148,20 @@ const ClaimRequestPage = () => {
           })}
         </div>
 
+        {/* Modal */}
         {isModalOpen && selectedPolicy && (
-          <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
-            <div className="bg-white rounded-lg p-6 w-full max-w-md">
-              <h2 className="text-xl text-primary font-semibold mb-4">Submit Claim for: {selectedPolicy.policyName}</h2>
+          <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50 p-4">
+            <div className="bg-white rounded-lg p-6 w-full max-w-md max-h-[90vh] overflow-auto">
+              <h2 className="text-xl text-primary font-semibold mb-4">
+                Submit Claim for: {selectedPolicy.policyName}
+              </h2>
               <form onSubmit={handleClaimSubmit} className="space-y-5">
                 <input
-                type="text"
-                value={selectedPolicy.policyName}
-                readOnly
-                className="input input-bordered w-full bg-white text-gray-700 font-semibold"
-              />
+                  type="text"
+                  value={selectedPolicy.policyName}
+                  readOnly
+                  className="input input-bordered w-full bg-white text-gray-700 font-semibold"
+                />
                 <textarea
                   name="reason"
                   placeholder="Reason for claim"
@@ -171,17 +174,17 @@ const ClaimRequestPage = () => {
                   required
                   className="file-input text-gray-700 bg-white file-input-bordered w-full cursor-pointer"
                 />
-                <div className="flex justify-end gap-4">
+                <div className="flex flex-col sm:flex-row justify-end gap-4">
                   <button
                     type="submit"
-                    className="btn bg-primary border-0 hover:bg-secondary text-white flex-1"
+                    className="btn bg-primary border-0 hover:bg-secondary text-white flex-1 sm:flex-none"
                     disabled={fileUploading}
                   >
                     {fileUploading ? "Submitting..." : "Submit Claim"}
                   </button>
                   <button
                     type="button"
-                    className="btn bg-secondary border-0 text-white hover:bg-primary/10 flex-1"
+                    className="btn bg-secondary border-0 text-white hover:bg-primary/10 flex-1 sm:flex-none"
                     onClick={() => {
                       closeModal();
                       setSelectedPolicy(null);

@@ -29,20 +29,27 @@ const ManagePolicies = () => {
   };
 
   return (
-    <div className="p-4">
-      <h2 className="text-3xl font-bold mb-4 text-primary">Manage Policies</h2>
-      
-      <div className="flex justify-end mb-4">
-        <button onClick={handleAdd} className="btn btn-primary flex items-center gap-2">
-          <FaPlus /> Add New Policy
+    <div className="p-4 max-w-screen-xl mx-auto">
+      <h2 className="text-2xl md:text-3xl font-bold mb-4 text-primary text-center md:text-left">
+        Manage Policies
+      </h2>
+
+      <div className="flex justify-center md:justify-end mb-4">
+        <button
+          onClick={handleAdd}
+          className="btn btn-primary flex items-center gap-2"
+        >
+          <FaPlus /> <span className="hidden sm:inline">Add New Policy</span>
         </button>
       </div>
 
-      <PolicyTable
-        policies={policies}
-        isLoading={isLoading}
-        onEdit={handleEdit}
-      />
+      <div className="overflow-x-auto">
+        <PolicyTable
+          policies={policies}
+          isLoading={isLoading}
+          onEdit={handleEdit}
+        />
+      </div>
 
       {modalOpen && (
         <PolicyFormModal

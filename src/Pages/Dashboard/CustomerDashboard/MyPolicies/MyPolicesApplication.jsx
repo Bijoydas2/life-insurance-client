@@ -38,33 +38,33 @@ const MyPoliciesApplication = () => {
   };
 
   return (
-    <div className="p-4">
-      <h2 className="text-2xl font-bold mb-4">My Policies</h2>
-      <div className="overflow-x-auto">
-        <table className="table w-full">
+    <div className="p-4 max-w-7xl mx-auto">
+      <h2 className="text-2xl font-bold mb-4 text-primary text-center sm:text-left">My Policies</h2>
+      <div className="overflow-x-auto rounded-md border border-gray-300 shadow-sm">
+        <table className="table-auto w-full min-w-[600px]">
           <thead>
-            <tr className="bg-secondary text-white">
-              <th>Policy</th>
-              <th>Status</th>
-              <th>Premium</th>
-              <th>Duration</th>
-              <th>Actions</th>
+            <tr className="bg-secondary text-white text-sm sm:text-base">
+              <th className="px-3 py-2 text-left">Policy</th>
+              <th className="px-3 py-2 text-left">Status</th>
+              <th className="px-3 py-2 text-right">Premium</th>
+              <th className="px-3 py-2 text-left">Duration</th>
+              <th className="px-3 py-2 text-center">Actions</th>
             </tr>
           </thead>
           <tbody>
             {myPolicies.map(policy => (
-              <tr key={policy._id} className="bg-white text-gray-700">
-                <td>{policy.policyName}</td>
-                <td>{policy.status}</td>
-                <td>{policy.basePremium} ৳</td>
-                <td>
+              <tr key={policy._id} className="bg-white text-gray-700 hover:bg-gray-50 transition">
+                <td className="px-3 py-2 max-w-xs truncate">{policy.policyName}</td>
+                <td className="px-3 py-2">{policy.status}</td>
+                <td className="px-3 py-2 text-right">{policy.basePremium} ৳</td>
+                <td className="px-3 py-2 max-w-xs truncate">
                   {Array.isArray(policy.duration)
                     ? policy.duration.join(', ')
                     : policy.duration}
                 </td>
-                <td>
+                <td className="px-3 py-2 text-center space-x-1 whitespace-nowrap">
                   <button
-                    className="btn btn-sm btn-info mr-2"
+                    className="btn btn-sm btn-info"
                     onClick={() => handleView(policy)}
                   >
                     View

@@ -44,8 +44,8 @@ const Navbar = () => {
   );
 
   return (
-    <nav className="bg-white shadow sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto px-4 py-6 flex justify-between items-center">
+    <nav className="bg-indigo-50 shadow sticky top-0 z-50">
+      <div className="max-w-7xl mx-auto px-4 py-4 lg:py-6 md:py-6 flex justify-between items-center">
         {/* Logo */}
         <div className="flex items-center gap-2 text-blue-600 text-xl font-bold">
           <Link to="/" className="flex items-center gap-2">
@@ -110,7 +110,7 @@ const Navbar = () => {
         <>
           <div onClick={toggleMenu} className="fixed top-0 right-0 w-64 bg-white z-50 p-6 shadow-lg rounded-bl-lg" />
           <div className="fixed top-0 right-0 w-64 bg-white z-50 p-6 shadow-lg rounded-bl-lg">
-            <button onClick={toggleMenu} className="self-end text-xl mb-4"><FaTimes /></button>
+            <button onClick={toggleMenu} className="self-end text-xl text-primary mb-4"><FaTimes /></button>
 
             {user && (
               <div className="flex flex-col items-center mb-4 border-b pb-4">

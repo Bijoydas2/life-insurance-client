@@ -1,16 +1,16 @@
 import React from 'react';
-import HeroSlider from '../../Components/HeroSlider';
 import PopularPolicies from '../../Components/PopularPolicies';
 import CustomerReviews from '../../Components/CustomerReviews';
 import LatestBlogs from '../../Components/LatestBlogs';
 import NewsletterForm from '../../Components/NewsletterForm';
 import MeetOurAgents from '../../Components/MeetOurAgents';
+import HeroCarousel from '../../Components/HeroCarousel';
 
 
 const Home = () => {
     return (
         <div>
-            <HeroSlider/>
+            <HeroCarousel/>
             <PopularPolicies/>
             <CustomerReviews/>
             <LatestBlogs/>

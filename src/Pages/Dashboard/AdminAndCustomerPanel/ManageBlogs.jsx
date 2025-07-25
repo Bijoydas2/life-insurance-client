@@ -59,11 +59,11 @@ const ManageBlogs = () => {
   };
 
   return (
-    <div className="p-4">
-      <div className="flex justify-between items-center mb-6">
+    <div className="p-4 max-w-full">
+      <div className="flex flex-col sm:flex-row justify-between items-center mb-6 gap-4">
         <h2 className="text-2xl font-semibold">Manage Blogs</h2>
         <button
-          className="btn btn-primary"
+          className="btn btn-primary whitespace-nowrap"
           onClick={() => {
             setEditingBlog(null);
             setIsModalOpen(true);
@@ -73,15 +73,15 @@ const ManageBlogs = () => {
         </button>
       </div>
 
-      <div className="overflow-x-auto">
-        <table className="table w-full">
+      <div className="overflow-x-auto rounded shadow-sm border border-gray-200">
+        <table className="table w-full min-w-[600px]">
           <thead>
             <tr className="bg-secondary text-white">
-              <th>Title</th>
-              <th>Author</th>
-              <th>Email</th>
-              <th>Visits</th>
-              <th>Actions</th>
+              <th className="whitespace-nowrap px-4 py-2">Title</th>
+              <th className="whitespace-nowrap px-4 py-2">Author</th>
+              <th className="whitespace-nowrap px-4 py-2">Email</th>
+              <th className="whitespace-nowrap px-4 py-2">Visits</th>
+              <th className="whitespace-nowrap px-4 py-2">Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -93,27 +93,32 @@ const ManageBlogs = () => {
               </tr>
             )}
             {blogs.map((blog) => (
-              <tr key={getId(blog._id)} className="bg-white text-gray-700 shadow-sm">
-                <td className="text-primary">{blog.title}</td>
-                <td>{blog.author}</td>
-                <td>{blog.authorEmail}</td>
-                <td>{blog.totalVisit}</td>
-                <td>
-                  <button
-                    className="btn btn-sm bg-green-700 border-0 mr-2"
-                    onClick={() => {
-                      setEditingBlog(blog);
-                      setIsModalOpen(true);
-                    }}
-                  >
-                    Edit
-                  </button>
-                  <button
-                    className="btn btn-sm btn-error"
-                    onClick={() => handleDelete(blog._id)}
-                  >
-                    Delete
-                  </button>
+              <tr
+                key={getId(blog._id)}
+                className="bg-white text-gray-700 hover:bg-gray-50 transition"
+              >
+                <td className="text-primary px-4 py-2 whitespace-nowrap max-w-xs truncate">{blog.title}</td>
+                <td className="px-4 py-2 whitespace-nowrap max-w-xs truncate">{blog.author}</td>
+                <td className="px-4 py-2 whitespace-nowrap max-w-xs truncate">{blog.authorEmail}</td>
+                <td className="px-4 py-2 whitespace-nowrap text-center">{blog.totalVisit}</td>
+                <td className="px-4 py-2 whitespace-nowrap">
+                  <div className="flex flex-wrap gap-2">
+                    <button
+                      className="btn btn-sm bg-green-700 border-0 whitespace-nowrap"
+                      onClick={() => {
+                        setEditingBlog(blog);
+                        setIsModalOpen(true);
+                      }}
+                    >
+                      Edit
+                    </button>
+                    <button
+                      className="btn btn-sm btn-error whitespace-nowrap"
+                      onClick={() => handleDelete(blog._id)}
+                    >
+                      Delete
+                    </button>
+                  </div>
                 </td>
               </tr>
             ))}
