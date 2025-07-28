@@ -63,6 +63,7 @@ const ManageTransactions = () => {
 
   return (
     <div className="p-6 max-w-7xl mx-auto">
+      <title>Manage Transaction</title>
       <h1 className="text-3xl font-bold mb-6 text-primary">Manage Transactions</h1>
 
       {/* Filters */}

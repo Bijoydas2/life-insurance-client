@@ -63,6 +63,7 @@ const ApplicationForm = () => {
 
   return (
     <div className="max-w-2xl mx-auto p-6 bg-white shadow my-12 rounded">
+     <title>Application Form</title>
       <h2 className="text-3xl font-bold mb-6 text-center text-[var(--color-primary)]">
         Application Form
       </h2>

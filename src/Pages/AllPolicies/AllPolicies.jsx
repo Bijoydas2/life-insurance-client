@@ -37,6 +37,7 @@ const AllPolicies = () => {
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-8">
+      <title>All Policies</title>
       <h2 className="text-4xl text-primary font-bold mb-6 text-center">All Policies</h2>
 
       {/* Filter + Search */}

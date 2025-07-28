@@ -102,6 +102,7 @@ const Register = () => {
 
   return (
     <div className="min-h-screen flex flex-col md:flex-row items-center justify-center p-4">
+       <title>Register</title>
       <div className="max-w-xs w-full">
         <Lottie animationData={registerLottie} loop={true} />
       </div>

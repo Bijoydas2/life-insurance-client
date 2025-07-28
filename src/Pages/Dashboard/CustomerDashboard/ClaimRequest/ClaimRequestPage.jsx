@@ -88,6 +88,7 @@ const ClaimRequestPage = () => {
 
   return (
     <div className="max-w-7xl mx-auto p-6 min-h-screen">
+      <title>Claim Request</title>
       <main className="bg-white rounded-lg p-6 shadow-md">
         <h2 className="text-3xl font-semibold text-primary mb-8 border-b border-gray-300 pb-2">
           Claim Request

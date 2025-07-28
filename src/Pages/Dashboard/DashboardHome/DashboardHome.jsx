@@ -3,7 +3,6 @@ import useUserRole from '../../../hooks/UseUserRole';
 import Loading from '../../../Components/Loading';
 import AgentDashboard from './AgentDashboard';
 import AdminDashboard from './AdminDashboard';
-import Forbidden from '../../Forbidden/Forbidden';
 import CustomerDashboard from './CustomerDashboard';
 
 const DashboardHome = () => { 
@@ -22,7 +21,7 @@ else if (role === 'admin'){
     return <AdminDashboard></AdminDashboard>
 }
 else{
-    return <Forbidden></Forbidden>
+    return <Forbidden> </Forbidden>
 }
 };
 

@@ -36,6 +36,7 @@ const Login = () => {
 
   return (
     <div className="min-h-screen flex flex-col md:flex-row items-center justify-center  p-6">
+      <title>Login</title>
       <div className="w-full max-w-sm md:max-w-md">
         <Lottie animationData={loginLottie} loop={true} />
       </div>

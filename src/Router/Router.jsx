@@ -27,7 +27,8 @@ import ProfilePage from "../Pages/ProfilePage/ProfilePage";
 import AdminRoute from "../Route/AdminRoute";
 import AgentRoute from "../Route/AgentRoute";
 import DashboardHome from "../Pages/Dashboard/DashboardHome/DashboardHome";
-
+import Forbidden  from "../Pages/Forbidden/Forbidden"
+import ErrorPage from "../Pages/Error/ErrorPage";
 
 
 export const router = createBrowserRouter([
@@ -65,8 +66,12 @@ export const router = createBrowserRouter([
        },
        {
         path:'/Profile',
-        Component:ProfilePage
-       } 
+        element:<PrivateRoute><ProfilePage/></PrivateRoute>
+       },
+       {
+        path:'forbidden',
+        Component:Forbidden,
+       }
     ]
   },
    {
@@ -142,8 +147,13 @@ export const router = createBrowserRouter([
       Component: ClaimRequestPage
 
       },
+
    
   ]
+  },
+  {
+    path:'/*',
+    Component:ErrorPage
   }
 
 ]);

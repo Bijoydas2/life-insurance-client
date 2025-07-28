@@ -33,6 +33,7 @@ const BlogsPage = () => {
 
   return (
     <section className="max-w-7xl mx-auto px-4 py-12">
+      <title>All Blogs </title>
       <h1 className="text-4xl font-bold text-center text-primary mb-12">
         All Blog Articles
       </h1>

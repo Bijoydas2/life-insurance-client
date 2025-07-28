@@ -42,6 +42,7 @@ const AgentDashboard = () => {
 
   return (
     <div className="p-6 space-y-8">
+      <title>Agent Dashboard</title>
     <h2 className="text-3xl font-bold text-primary flex items-center gap-2">
     <FaUserTie className="text-primary w-8 h-8" />
   Agent Dashboard

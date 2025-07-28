@@ -54,6 +54,7 @@ const CustomerDashboard = () => {
 
   return (
     <div className="p-4 space-y-6">
+      <title>Dashboard</title>
       <h2 className="text-2xl font-semibold text-center">Customer Dashboard</h2>
 
       {/* Summary Cards */}

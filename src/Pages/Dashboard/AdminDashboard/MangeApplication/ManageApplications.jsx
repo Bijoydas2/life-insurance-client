@@ -56,6 +56,7 @@ const ManageApplications = () => {
 
   return (
     <div className="p-4">
+      <title>Manage Application</title>
       <h2 className="text-3xl font-bold text-primary mb-6">Manage Applications</h2>
       <div className="overflow-x-auto">
         <table className="w-full bg-white shadow-md rounded-lg text-sm sm:text-base">

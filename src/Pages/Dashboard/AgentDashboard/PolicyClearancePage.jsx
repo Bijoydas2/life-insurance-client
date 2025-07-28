@@ -46,6 +46,7 @@ const PolicyClearancePage = () => {
 
   return (
     <div className="max-w-7xl mx-auto p-4 sm:p-6">
+      <title>Policy Clearance</title>
       <h1 className="text-3xl font-bold mb-6 text-primary text-center sm:text-left">Policy Clearance</h1>
 
       {claims.length === 0 ? (

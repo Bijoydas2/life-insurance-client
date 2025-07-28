@@ -20,6 +20,7 @@ const PaymentStatus = () => {
 
   return (
     <div className="p-4">
+      <title>Payment Status</title>
       <h2 className="text-2xl font-bold mb-4">Payment Status</h2>
       <div className="overflow-x-auto">
         <table className="table w-full">

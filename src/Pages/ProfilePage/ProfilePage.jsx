@@ -6,6 +6,7 @@ import { FaEnvelope, FaClock } from "react-icons/fa";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { toast } from "react-toastify";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
+import Loading from "../../Components/Loading";
 
 const ProfilePage = () => {
   const { user } = UseAuth();
@@ -101,11 +102,7 @@ const ProfilePage = () => {
   };
 
   if (isLoading || roleLoading) {
-    return (
-      <div className="flex justify-center items-center h-64">
-        <span className="loading loading-spinner loading-lg"></span>
-      </div>
-    );
+    return <Loading/>;
   }
 
   if (isError || !profile) {
@@ -118,6 +115,7 @@ const ProfilePage = () => {
 
   return (
     <div className="max-w-2xl mx-auto bg-white my-12 py-10 rounded-xl shadow-lg">
+       <title>My Profile</title>
       <h2 className="text-3xl font-bold text-center text-primary mb-6">
         My Profile
       </h2>

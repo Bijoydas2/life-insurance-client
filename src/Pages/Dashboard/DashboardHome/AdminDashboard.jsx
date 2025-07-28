@@ -37,6 +37,7 @@ const AdminDashboard = () => {
 
   return (
     <div className="p-6">
+      <title>Admin Dashboard</title>
       <h2 className="text-3xl font-bold mb-6 text-center text-primary">📊 Admin Dashboard Overview</h2>
 
       {/* Summary Cards */}

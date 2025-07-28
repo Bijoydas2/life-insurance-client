@@ -48,6 +48,7 @@ const PolicyDetailsPage = () => {
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-10 my-12 bg-white rounded-lg shadow-md">
+      <title>Policy Details</title>
       <div className="md:flex md:gap-10">
         {/* Image Section */}
         <div className="md:w-1/2">

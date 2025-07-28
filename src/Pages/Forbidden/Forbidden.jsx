@@ -1,23 +1,23 @@
-import { FaLock } from "react-icons/fa";
-import { Link } from "react-router";
-
+import React from 'react';
+import { Link } from 'react-router';
+import { FaBan } from 'react-icons/fa'; 
 
 const Forbidden = () => {
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100 px-4">
-      <div className="bg-white p-8 rounded-xl shadow-lg max-w-md text-center">
-        <div className="flex justify-center mb-4">
-          <FaLock className="w-16 h-16 text-red-500" />
+    <div className="min-h-screen flex items-center justify-center bg-black px-4">
+      <div className="text-center max-w-md bg-white p-8 rounded-2xl shadow-lg">
+        <div className="flex justify-center mb-6 text-red-500">
+          <FaBan size={60} />
         </div>
-        <h1 className="text-3xl font-bold text-gray-800 mb-2">403 - Forbidden</h1>
+        <h1 className="text-4xl font-bold text-gray-800 mb-4">403 Forbidden</h1>
         <p className="text-gray-600 mb-6">
-          You do not have permission to access this page.
+          You don't have permission to access this page.
         </p>
         <Link
           to="/"
-          className="inline-block px-6 py-2 bg-indigo-600 text-white font-semibold rounded hover:bg-indigo-700 transition"
+          className="inline-block bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded-xl transition"
         >
-          Go to Home
+          Go Home
         </Link>
       </div>
     </div>

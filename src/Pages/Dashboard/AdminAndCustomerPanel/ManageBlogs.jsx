@@ -60,6 +60,7 @@ const ManageBlogs = () => {
 
   return (
     <div className="p-4 max-w-full">
+      <title>Manage Blogs</title>
       <div className="flex flex-col sm:flex-row justify-between items-center mb-6 gap-4">
         <h2 className="text-2xl font-semibold">Manage Blogs</h2>
         <button

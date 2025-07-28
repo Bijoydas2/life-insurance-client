@@ -74,6 +74,7 @@ const ManageUsers = () => {
 
   return (
     <div className="p-4">
+      <title>Manage Users</title>
       <h2 className="text-3xl font-bold mb-6 text-primary">Manage Users</h2>
 
       {isLoading && <div>Loading users...</div>}

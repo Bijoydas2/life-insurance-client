@@ -45,6 +45,7 @@ const AssignedCustomers = () => {
 
   return (
     <div className="p-4 max-w-full">
+      <title>Assigned Customer</title>
       <h2 className="text-2xl font-semibold mb-4 text-primary">Assigned Customers</h2>
 
       <div className="overflow-x-auto border border-gray-200 rounded-md shadow-sm">

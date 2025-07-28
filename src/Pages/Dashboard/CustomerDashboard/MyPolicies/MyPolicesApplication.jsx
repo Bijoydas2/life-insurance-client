@@ -39,6 +39,7 @@ const MyPoliciesApplication = () => {
 
   return (
     <div className="p-4 max-w-7xl mx-auto">
+      <title>My Policies Application</title>
       <h2 className="text-2xl font-bold mb-4 text-primary text-center sm:text-left">My Policies</h2>
       <div className="overflow-x-auto rounded-md border border-gray-300 shadow-sm">
         <table className="table-auto w-full min-w-[600px]">

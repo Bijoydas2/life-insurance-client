@@ -45,6 +45,7 @@ const QuotePage = () => {
       className="max-w-lg mx-auto p-6 bg-white rounded shadow my-12"
       style={{ color: "var(--color-primary)" }}
     >
+        <title>Get Quote</title>
       <h2 className="text-3xl font-bold mb-6 text-center" style={{ color: "var(--color-primary)" }}>
         Get Your Quote
       </h2>

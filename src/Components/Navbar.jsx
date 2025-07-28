@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { Link, NavLink, useLocation } from "react-router";
 import { FaBars, FaTimes, FaUserCircle } from "react-icons/fa";
 import UseAuth from "../hooks/UseAuth";
-
+import LifeSecure from '../Components/LifeSecure'
 const Navbar = () => {
   const { user, SignOut } = UseAuth();
   const [isOpen, setIsOpen] = useState(false);
@@ -38,7 +38,7 @@ const Navbar = () => {
     <>
       <NavLink to="/" className={navLinkClass}>Home</NavLink>
       <NavLink to="/allPolicies" className={navLinkClass}>All Policies</NavLink>
-      <NavLink to="/blogs" className={navLinkClass}>Blog/Articles</NavLink>
+      <NavLink to="/blogs" className={navLinkClass}>Blogs</NavLink>
       {user && <NavLink to="/dashboard" className={navLinkClass}>Dashboard</NavLink>}
     </>
   );
@@ -46,12 +46,10 @@ const Navbar = () => {
   return (
     <nav className="bg-indigo-50 shadow sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 py-4 lg:py-6 md:py-6 flex justify-between items-center">
+      
         {/* Logo */}
         <div className="flex items-center gap-2 text-blue-600 text-xl font-bold">
-          <Link to="/" className="flex items-center gap-2">
-            <img src="/logo.png" alt="Logo" className="h-8 w-8" />
-            <span>LifeSecure</span>
-          </Link>
+          <LifeSecure/>
         </div>
 
         {/* Desktop Links */}

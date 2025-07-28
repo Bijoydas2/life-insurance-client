@@ -10,6 +10,7 @@ import HeroCarousel from '../../Components/HeroCarousel';
 const Home = () => {
     return (
         <div>
+            <title>Life Secure</title>
             <HeroCarousel/>
             <PopularPolicies/>
             <CustomerReviews/>

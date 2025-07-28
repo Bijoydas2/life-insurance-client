@@ -30,6 +30,7 @@ const ManagePolicies = () => {
 
   return (
     <div className="p-4 max-w-screen-xl mx-auto">
+      <title>Manage Policies</title>
       <h2 className="text-2xl md:text-3xl font-bold mb-4 text-primary text-center md:text-left">
         Manage Policies
       </h2>

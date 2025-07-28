@@ -37,6 +37,7 @@ const BlogDetailsPage = () => {
 
   return (
     <div className="max-w-4xl mx-auto px-6 py-10 my-12 bg-white rounded-2xl shadow-xl border border-gray-200">
+      <title>Blog Details</title>
       {/* Image */}
       <img
         src={blog.image}
