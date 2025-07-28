@@ -3,12 +3,11 @@ import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router";
 import { FaEye } from "react-icons/fa";
 import { format } from "date-fns";
-
-import useAxiosSecure from "../../hooks/useAxiosSecure";
 import Loading from "../../Components/Loading";
+import UseAxios from "../../hooks/UseAxios";
 
 const BlogsPage = () => {
-  const axiosSecure = useAxiosSecure();
+  const axiosInstance = UseAxios();
 
   const {
     data: blogs = [],
@@ -17,7 +16,7 @@ const BlogsPage = () => {
   } = useQuery({
     queryKey: ["allBlogs"],
     queryFn: async () => {
-      const res = await axiosSecure.get("/blogs");
+      const res = await axiosInstance.get("/blogs");
       return res.data;
     },
   });
@@ -60,7 +59,7 @@ const BlogsPage = () => {
                 </span>
               </div>
 
-              <h2 className="text-xl text-secondary font-semibold text-gray-800 mb-2 line-clamp-2">
+              <h2 className="text-xl text-secondary font-semibold  mb-2 line-clamp-2">
                 {blog.title}
               </h2>
 

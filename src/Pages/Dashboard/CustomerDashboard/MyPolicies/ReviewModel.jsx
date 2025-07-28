@@ -3,7 +3,8 @@ import { useForm } from 'react-hook-form';
 import Swal from 'sweetalert2';
 import { FaStar } from 'react-icons/fa';
 import useAxiosSecure from '../../../../hooks/useAxiosSecure';
-import UseAuth from '../../../../hooks/useAuth';
+import UseAuth from '../../../../hooks/UseAuth';
+
 
 const ReviewModal = ({ policy, closeModal }) => {
   const { user } = UseAuth();

@@ -1,17 +1,18 @@
 import React from "react";
 import { useQuery } from "@tanstack/react-query";
-import useAxiosSecure from "../hooks/useAxiosSecure";
+
 import { FaStar, FaFire } from "react-icons/fa";
 import { Link } from "react-router";
 import Loading from "./Loading";
+import UseAxios from "../hooks/UseAxios";
 
 const PopularPolicies = () => {
-  const axiosSecure = useAxiosSecure();
+  const axiosInstance = UseAxios();
 
   const { data: policies = [], isLoading } = useQuery({
     queryKey: ["popularPolicies"],
     queryFn: async () => {
-      const res = await axiosSecure.get("/policies/popular");
+      const res = await axiosInstance.get("/policies/popular");
       return res.data;
     },
   });

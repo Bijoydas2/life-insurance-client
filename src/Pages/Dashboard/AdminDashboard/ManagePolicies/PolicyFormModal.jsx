@@ -12,7 +12,6 @@ const PolicyFormModal = ({ policy, closeModal }) => {
     register,
     control,
     handleSubmit,
-    reset,
     formState: { errors },
   } = useForm({
     defaultValues: policy || {

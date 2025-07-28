@@ -1,10 +1,10 @@
 import React from 'react';
 import useUserRole from '../../../hooks/UseUserRole';
 import Loading from '../../../Components/Loading';
-import CustomerDashboard from './CustomerDashboard';
 import AgentDashboard from './AgentDashboard';
 import AdminDashboard from './AdminDashboard';
 import Forbidden from '../../Forbidden/Forbidden';
+import CustomerDashboard from './CustomerDashboard';
 
 const DashboardHome = () => { 
 const {role,isLoading}= useUserRole();

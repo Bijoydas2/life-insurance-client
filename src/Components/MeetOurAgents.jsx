@@ -1,15 +1,15 @@
 import { useQuery } from "@tanstack/react-query";
-import useAxiosSecure from "../hooks/useAxiosSecure";
 import { FaUserTie } from "react-icons/fa6";
 import Loading from "./Loading";
+import UseAxios from "../hooks/UseAxios";
 
 const MeetOurAgents = () => {
-  const axiosSecure = useAxiosSecure();
+  const axiosInstance = UseAxios();
 
   const { data: agents = [], isLoading } = useQuery({
     queryKey: ['agents'],
     queryFn: async () => {
-      const res = await axiosSecure.get('/agents');
+      const res = await axiosInstance.get('/agents');
       return res.data;
     }
   });

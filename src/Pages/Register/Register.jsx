@@ -131,11 +131,14 @@ const Register = () => {
             <label className="block text-sm text-gray-700 font-medium mb-1">
               Email
             </label>
-            <input
+               <input
               type="email"
               {...register("email", { required: "Email is required" })}
               placeholder="Enter Your Email"
               className="w-full px-4 py-2 border text-gray-700 border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+              onChange={(e) => {
+                e.target.value = e.target.value.toLowerCase();
+              }}
             />
             {errors.email && (
               <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>

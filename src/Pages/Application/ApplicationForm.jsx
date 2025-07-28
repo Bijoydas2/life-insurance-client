@@ -38,7 +38,7 @@ const ApplicationForm = () => {
       email: user.email,
       name: user.displayName,
       status: "Pending",
-      paymentStatus: "Due", // ✅ newly added
+      paymentStatus: "Due", 
       createdAt: new Date(),
     };
 

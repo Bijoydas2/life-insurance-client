@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import Loading from "../../Components/Loading";
 import { Link } from 'react-router';
-import useAxiosSecure from '../../hooks/useAxiosSecure';
+import UseAxios from '../../hooks/UseAxios';
 
 const AllPolicies = () => {
-  const axiosSecure = useAxiosSecure();
+  const axiosInstance = UseAxios();
 
   const [page, setPage] = useState(1);
   const [category, setCategory] = useState('');
@@ -14,7 +14,7 @@ const AllPolicies = () => {
   const { data, isLoading } = useQuery({
     queryKey: ['policies', page, category, search],
     queryFn: async () => {
-      const res = await axiosSecure.get(
+      const res = await axiosInstance.get(
         `/policies?page=${page}&limit=9&category=${category}&search=${search}`
       );
       return res.data;

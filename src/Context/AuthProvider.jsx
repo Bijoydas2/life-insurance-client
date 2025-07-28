@@ -4,13 +4,16 @@ import React, { useEffect, useState } from 'react';
 import { createUserWithEmailAndPassword, onAuthStateChanged,signOut, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, updateProfile } from 'firebase/auth';
 import { AuthContext } from './Context';
 import { auth } from '../Firebase/firebase-init';
+import UseAxios from '../hooks/UseAxios';
+
+
 
 
 const AuthProvider = ({children}) => {
   const [loading,setLoading] =useState(true);
   const [user,setUser]= useState(null);
   const provider = new GoogleAuthProvider();
-
+  const axiosInstance=UseAxios();
   // create user
  const createUser = (email,password)=>{
     setLoading(true)
@@ -23,10 +26,17 @@ const AuthProvider = ({children}) => {
   return signInWithEmailAndPassword(auth,email,password)
  }
 //  user logout
- const SignOut= ()=>{
-  setLoading(true);
-  return signOut(auth)
- }
+  const SignOut = async () => {
+    setLoading(true);
+    try {
+      await signOut(auth);
+      await axiosInstance.post('/logout', {}, { withCredentials: true });
+    } catch (error) {
+      console.error('Logout error:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
 //  Update profile
  const updateUserProfile = (profile)=>{
   setLoading(true);
@@ -44,13 +54,27 @@ useEffect(()=>{
   const unsubscribe = onAuthStateChanged(auth,currentUser=>{
     setUser(currentUser);
     setLoading(false)
-    console.log('current user',currentUser)
-  })
+     if (currentUser?.email) {
+        const userData = { email: currentUser.email };
+
+        axiosInstance
+        .post('/jwt', userData, { withCredentials: true })
+          
+          .then((res) => {
+            console.log('Token after JWT:', res.data);
+          })
+          .catch((error) => {
+            console.error('JWT Error:', error);
+          });
+      }
+
+      
+    });
   return ()=> {
     unsubscribe();
   }
 
-},[])
+},[axiosInstance])
 
 
    const authInfo = {
@@ -67,7 +91,7 @@ useEffect(()=>{
 
     return (
         <AuthContext value={authInfo}>
-          {children}
+            {children}
         </AuthContext>
     );
 };

@@ -1,6 +1,5 @@
 import React from 'react';
 import { useQuery } from '@tanstack/react-query';
-import useAxiosSecure from '../hooks/useAxiosSecure';
 import { FaStar } from 'react-icons/fa';
 import Loading from './Loading';
 
@@ -9,9 +8,10 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import { Navigation } from 'swiper/modules';
+import UseAxios from '../hooks/UseAxios';
 
 const CustomerReviews = () => {
-  const axiosSecure = useAxiosSecure();
+  const axiosInstance = UseAxios();
 
   const {
     data: reviews = [],
@@ -20,7 +20,7 @@ const CustomerReviews = () => {
   } = useQuery({
     queryKey: ['reviews'],
     queryFn: async () => {
-      const res = await axiosSecure.get('/reviews');
+      const res = await axiosInstance.get('/reviews');
       return res.data;
     },
   });

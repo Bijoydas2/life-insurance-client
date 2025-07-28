@@ -54,7 +54,7 @@ const AgentDashboard = () => {
           <p className="text-3xl text-blue-600 font-bold">{assignedCustomersCount}</p>
         </div>
         <div className="bg-green-100 p-6 rounded-xl shadow-md">
-          <h4 className="text-xl font-semibold text-[#00C49F]">Clearance Requests</h4>
+          <h4 className="text-xl font-semibold text-[#00C49F]">Clearance Approved</h4>
           <p className="text-3xl text-green-600 font-bold">{clearanceRequestsCount}</p>
         </div>
         <div className="bg-yellow-100 p-6 rounded-xl shadow-md">
