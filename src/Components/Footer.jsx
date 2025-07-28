@@ -1,5 +1,6 @@
 import { FaFacebookF, FaLinkedinIn, FaTwitter, FaEnvelope, FaPhone } from 'react-icons/fa';
-
+import { Link } from 'react-router';
+import logo from '../../public/logo.png'
 const Footer = () => {
   return (
     <footer className="bg-primary text-white pt-10 pb-6">
@@ -7,7 +8,12 @@ const Footer = () => {
 
         {/* Company Info */}
         <div>
-          <h2 className="text-2xl font-bold mb-4">LifeSecure</h2>
+           <Link to='/'>
+        <div className='flex items-center'>
+            <img className='mr-4 w-8 h-10  '  src={logo} alt="" />
+            <p className='text-2xl text-white -ms-2 font-extrabold'>Life Secure</p>
+        </div>
+       </Link>
           <p className="text-sm leading-6">
             Your trusted partner in securing your family's future. We make insurance simple, accessible, and transparent.
           </p>

@@ -12,8 +12,9 @@ import {
   FaClipboardCheck,
   FaHome,
 } from "react-icons/fa";
-import LifeSecure from "../Components/lifeSecure";
+
 import useUserRole from "../hooks/UseUserRole";
+import LifeSecure from "../Components/LifeSecure";
 
 const DashboardLayout = () => {
   const { role, isLoading } = useUserRole();
@@ -67,7 +68,7 @@ const DashboardLayout = () => {
       <div className="drawer-side">
         <label htmlFor="dashboard-drawer" className="drawer-overlay"></label>
         <aside className="w-64 md:h-full lg:h-full bg-white text-primary border-r p-6 shadow-md">
-          <LifeSecure />
+          <LifeSecure/>
 
           <nav className="space-y-3 mt-10">
             {!isLoading && role === "admin" && (

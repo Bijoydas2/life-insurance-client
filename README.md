@@ -6,7 +6,7 @@ A full-featured MERN stack life insurance management platform with role-based da
 
 ##  Live Website
 
-🔗 [https://lifesecure.web.app](https://lifesecure.web.app)
+🔗 [https://life-insurance-app-ee9f3.web.app/](https://life-insurance-app-ee9f3.web.app/)
 
 ---
 
@@ -31,28 +31,29 @@ A full-featured MERN stack life insurance management platform with role-based da
 
 ##  Key Features
 
-- <span title="Access Control"><i class="fa fa-user-shield"></i></span> Role-based access control: Admin | Agent | Customer  
-- <span title="Admin Dashboard"><i class="fa fa-tachometer-alt"></i></span> Admin Dashboard:
-  - Manage users, policies, and transactions  
-  - Approve or reject applications  
-  - Analytics and income reports (with PDF export)  
-  - Blog/article management  
-- <span title="Agent Dashboard"><i class="fa fa-user-tie"></i></span> Agent Dashboard:
-  - Add and manage policies  
-  - Post and manage personal blogs  
-- <span title="Customer Dashboard"><i class="fa fa-users"></i></span> Customer Dashboard:
-  - Apply for insurance policies  
-  - Track application and payment statuses  
-  - Write reviews and testimonials  
-- <span title="Payment"><i class="fa fa-credit-card"></i></span> Stripe integration for secure payments  
-- <span title="Blog System"><i class="fa fa-blog"></i></span> Role-based blog system with post count  
-- <span title="Application"><i class="fa fa-file-signature"></i></span> Application form with personal, nominee, and health info  
-- <span title="Protected Routes"><i class="fa fa-lock"></i></span> Protected routes using JWT and HttpOnly cookies  
-- <span title="PDF"><i class="fa fa-file-pdf"></i></span> PDF download support for applications and reports  
-- <span title="Search"><i class="fa fa-search"></i></span> Case-insensitive search, filters, and pagination  
-- <span title="Analytics"><i class="fa fa-chart-line"></i></span> Real-time dashboard analytics with MongoDB aggregation  
-- <span title="Errors"><i class="fa fa-exclamation-triangle"></i></span> Custom Forbidden and 404 Error pages  
-- <span title="Responsive"><i class="fa fa-mobile-alt"></i></span> Fully responsive and mobile-ready
+-  Role-based access: Admin | Agent | Customer  
+-  Admin Dashboard:  
+-  View and manage users  
+-  Manage all policies and transactions  
+-  Approve/reject applications  
+-  View earnings analytics and export as PDF  
+-  Blog/article management  
+-  Agent Dashboard:  
+-  Add & manage policies  
+-  View and manage personal blogs  
+-  Customer Dashboard:  
+-  Apply for policies  
+-  Track application and payment status   
+-  Make payments via Stripe   - Write reviews/testimonials  
+-  Secure Stripe Integration with payment tracking  
+-  Blog System with role-based posting  
+-  Application form with personal, nominee, and health info  
+-  Protected routes using JWT verification with HttpOnly cookies  
+-  Downloadable PDF documents  
+-  Case-insensitive search, filters, and pagination  
+-  Real-time dashboard statistics using MongoDB aggregation  
+-  Custom Forbidden and Error pages  
+-  Fully responsive and production-ready  
 
 
 ---

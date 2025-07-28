@@ -53,7 +53,6 @@ const HeroCarousel = () => {
               transform
               -translate-x-1/2
               -translate-y-1/2
-              backdrop-blur-sm
               p-4 sm:p-6
               rounded-lg
               max-w-[90%]

@@ -38,7 +38,7 @@ const BlogsPage = () => {
         All Blog Articles
       </h1>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
         {blogs.map((blog) => (
           <div
             key={blog._id}
@@ -48,7 +48,7 @@ const BlogsPage = () => {
             <img
               src={blog.image}
               alt={blog.title}
-              className="w-full h-52 object-cover"
+              className="w-full h-46 object-cover"
             />
 
             {/* Content */}

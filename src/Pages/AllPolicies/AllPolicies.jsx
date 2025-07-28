@@ -1,18 +1,18 @@
-import React, { useState } from 'react';
-import { useQuery } from '@tanstack/react-query';
+import React, { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import Loading from "../../Components/Loading";
-import { Link } from 'react-router';
-import UseAxios from '../../hooks/UseAxios';
+import { Link } from "react-router"; 
+import UseAxios from "../../hooks/UseAxios";
 
 const AllPolicies = () => {
   const axiosInstance = UseAxios();
 
   const [page, setPage] = useState(1);
-  const [category, setCategory] = useState('');
-  const [search, setSearch] = useState('');
+  const [category, setCategory] = useState("");
+  const [search, setSearch] = useState("");
 
   const { data, isLoading } = useQuery({
-    queryKey: ['policies', page, category, search],
+    queryKey: ["policies", page, category, search],
     queryFn: async () => {
       const res = await axiosInstance.get(
         `/policies?page=${page}&limit=9&category=${category}&search=${search}`
@@ -33,19 +33,20 @@ const AllPolicies = () => {
     setPage(1);
   };
 
-  if (isLoading) return <Loading/>;
+  if (isLoading) return <Loading />;
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-8">
-      <title>All Policies</title>
-      <h2 className="text-4xl text-primary font-bold mb-6 text-center">All Policies</h2>
+    <div className="max-w-7xl mx-auto px-4 py-10">
+      <h2 className="text-4xl text-primary font-bold mb-10 text-center">
+        All Policies
+      </h2>
 
       {/* Filter + Search */}
-      <div className="flex flex-col sm:flex-row justify-between gap-4 mb-6">
+       <div className="flex flex-col sm:flex-row justify-between gap-4 mb-6">
         <select
           value={category}
           onChange={handleCategoryChange}
-          className="border text-gray-300 p-2 rounded w-full sm:w-auto"
+          className="border text-gray-400 p-2 rounded w-full sm:w-auto"
         >
           <option value="">All Categories</option>
           <option value="Term Life">Term Life</option>
@@ -67,70 +68,90 @@ const AllPolicies = () => {
         </form>
       </div>
 
-      {/* Policies Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+      {/* Policy Cards */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
         {policies.map((policy) => (
           <div
             key={policy._id}
-            className="p-4 shadow-md rounded bg-white flex flex-col"
+            className="group relative bg-white rounded-3xl shadow-md hover:shadow-2xl transition-shadow duration-300 flex flex-col overflow-hidden"
           >
-            <img
-              src={policy.image}
-              alt={policy.title}
-              className="w-full h-40 object-cover rounded"
-            />
-            <h3 className="text-2xl text-secondary font-semibold mt-3">{policy.title}</h3>
-            <p className="text-sm text-gray-700 mt-1 flex-grow">
-              {policy.description?.slice(0, 60)}...
-            </p>
-            <Link
-              to={`/policy/${policy._id}`}
-              className="mt-4 inline-block bg-primary text-white px-4 py-2 rounded text-center"
-            >
-              View
-            </Link>
+            {/* Image with overlay */}
+            <div className="relative h-52 overflow-hidden rounded-t-3xl">
+              <img
+                src={policy.image}
+                alt={policy.title}
+                className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+              <div className="absolute bottom-3 left-4 right-4 text-white">
+                <h3 className="text-lg font-semibold line-clamp-2 drop-shadow">
+                  {policy.title}
+                </h3>
+              </div>
+            </div>
+
+            {/* Content */}
+            <div className="p-6 flex flex-col flex-grow">
+              <p className="text-gray-600 text-sm mb-4 line-clamp-3">
+                {policy.description?.slice(0, 120) || "No description"}
+              </p>
+
+              <div className="mt-auto">
+                <Link
+                  to={`/policy/${policy._id}`}
+                  className="block bg-primary hover:bg-secondary text-white text-center py-3 rounded-full font-semibold transition duration-300 shadow-md"
+                >
+                  View Details
+                </Link>
+              </div>
+            </div>
           </div>
         ))}
       </div>
 
-     {/* Pagination with Prev / Page Numbers / Next */}
-<div className="flex justify-center mt-8 gap-2 flex-wrap">
-  {/* Prev Button */}
-  <button
-    onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
-    disabled={page === 1}
-    className={`px-4 py-2 text-gray-700 rounded ${
-      page === 1 ? 'bg-gray-300  cursor-not-allowed' : 'bg-gray-200 hover:bg-primary'
-    }`}
-  >
-    Prev
-  </button>
+      {/* Pagination */}
+      <div className="flex justify-center mt-12 gap-2 flex-wrap">
+        {/* Prev */}
+        <button
+          onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
+          disabled={page === 1}
+          className={`px-4 py-2 text-gray-700 rounded ${
+            page === 1
+              ? "bg-gray-300 cursor-not-allowed"
+              : "bg-gray-200 hover:bg-primary hover:text-white"
+          }`}
+        >
+          Prev
+        </button>
 
-  {/* Page Number Buttons */}
-  {Array.from({ length: totalPages }, (_, idx) => idx + 1).map((pg) => (
-    <button
-      key={pg}
-      onClick={() => setPage(pg)}
-      className={`px-4 py-2 text-gray-700 rounded ${
-        page === pg ? 'bg-primary text-white  font-semibold' : 'bg-gray-200 hover:bg-gray-300'
-      }`}
-    >
-      {pg}
-    </button>
-  ))}
+        {/* Page numbers */}
+        {Array.from({ length: totalPages }, (_, idx) => idx + 1).map((pg) => (
+          <button
+            key={pg}
+            onClick={() => setPage(pg)}
+            className={`px-4 py-2 rounded font-medium ${
+              page === pg
+                ? "bg-primary text-white"
+                : "bg-gray-200 hover:bg-gray-300 text-gray-700"
+            }`}
+          >
+            {pg}
+          </button>
+        ))}
 
-  {/* Next Button */}
-  <button
-    onClick={() => setPage((prev) => Math.min(prev + 1, totalPages))}
-    disabled={page === totalPages}
-    className={`px-4 py-2 text-gray-700 rounded ${
-      page === totalPages ? 'bg-gray-300 cursor-not-allowed' : 'bg-gray-200 hover:bg-primary'
-    }`}
-  >
-    Next
-  </button>
-</div>
-
+        {/* Next */}
+        <button
+          onClick={() => setPage((prev) => Math.min(prev + 1, totalPages))}
+          disabled={page === totalPages}
+          className={`px-4 py-2 text-gray-700 rounded ${
+            page === totalPages
+              ? "bg-gray-300 cursor-not-allowed"
+              : "bg-gray-200 hover:bg-primary hover:text-white"
+          }`}
+        >
+          Next
+        </button>
+      </div>
     </div>
   );
 };
