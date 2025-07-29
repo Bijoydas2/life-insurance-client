@@ -15,7 +15,6 @@ const ClaimRequestPage = () => {
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
-
   const { data: approvedPolicies = [] } = useQuery({
     queryKey: ["approvedPolicies", user?.email],
     queryFn: async () => {

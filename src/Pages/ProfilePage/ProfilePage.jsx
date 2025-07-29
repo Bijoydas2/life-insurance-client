@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import Loading from "../../Components/Loading";
 
+
 const ProfilePage = () => {
   const { user } = UseAuth();
   const { role, isLoading: roleLoading } = UseUserRole();
@@ -22,7 +23,7 @@ const ProfilePage = () => {
     handleSubmit,
     reset,
     setValue,
-    formState: { isSubmitting },
+    formState: { isSubmitting, errors },
   } = useForm({
     defaultValues: {
       name: "",
@@ -96,13 +97,13 @@ const ProfilePage = () => {
   const onSubmit = (data) => {
     const updatedInfo = {
       name: data.name,
-      photoURL: data.photoURL, 
+      photoURL: data.photoURL,
     };
     handleUpdate(updatedInfo);
   };
 
   if (isLoading || roleLoading) {
-    return <Loading/>;
+    return <Loading />;
   }
 
   if (isError || !profile) {
@@ -115,36 +116,36 @@ const ProfilePage = () => {
 
   return (
     <div className="max-w-2xl mx-auto bg-white my-12 py-10 rounded-xl shadow-lg">
-       <title>My Profile</title>
+      
+        <title>My Profile</title>
+   
+
       <h2 className="text-3xl font-bold text-center text-primary mb-6">
         My Profile
       </h2>
 
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className="max-w-md mx-auto p-8 rounded-lg space-y-6"
-      >
+      <form onSubmit={handleSubmit(onSubmit)} className="max-w-md mx-auto p-8 rounded-lg space-y-6">
         {/* Image, Name, Role */}
         <div className="flex flex-col items-center gap-3">
           <div className="w-28 h-28 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2 overflow-hidden">
-          <img
-          src={photoPreview || profile.photoURL || "/default-avatar.png"}
-          alt="Profile"
-         className="object-cover w-full h-full"
-        onError={(e) => (e.target.src = "/default-avatar.png")}
-       />
-
+            <img
+              src={photoPreview || profile.photoURL || user.photoURL || "/default-avatar.png"}
+              alt="Profile"
+              className="object-cover w-full h-full"
+              onError={(e) => (e.target.src = "/default-avatar.png")}
+            />
           </div>
 
           {isEditing ? (
             <>
               <input
                 type="text"
-                {...register("name")}
+                {...register("name", { required: "Name is required" })}
                 placeholder="Full Name"
                 className="input input-bordered w-full max-w-xs text-center font-semibold text-lg"
                 autoComplete="name"
               />
+              {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>}
               <input
                 type="file"
                 accept="image/*"
@@ -191,7 +192,7 @@ const ProfilePage = () => {
         </div>
 
         {/* Action buttons */}
-        {isEditing && (
+        {isEditing ? (
           <div className="flex justify-end gap-4 mt-4">
             <button
               type="button"
@@ -207,21 +208,16 @@ const ProfilePage = () => {
             >
               Cancel
             </button>
-            <button
-              type="submit"
-              className="btn btn-primary btn-md"
-              disabled={isSubmitting}
-            >
+            <button type="submit" className="btn btn-primary btn-md" disabled={isSubmitting}>
               {isSubmitting ? "Updating..." : "Update"}
             </button>
           </div>
-        )}
-
-        {!isEditing && (
+        ) : (
           <button
             type="button"
             onClick={() => setIsEditing(true)}
             className="btn btn-primary btn-sm mt-4 w-full"
+            disabled={isSubmitting}
           >
             Edit
           </button>

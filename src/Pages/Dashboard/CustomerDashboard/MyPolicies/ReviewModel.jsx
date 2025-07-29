@@ -6,6 +6,7 @@ import useAxiosSecure from '../../../../hooks/useAxiosSecure';
 import UseAuth from '../../../../hooks/UseAuth';
 
 
+
 const ReviewModal = ({ policy, closeModal }) => {
   const { user } = UseAuth();
   const axiosSecure = useAxiosSecure();
@@ -22,6 +23,7 @@ const ReviewModal = ({ policy, closeModal }) => {
   const onSubmit = async (data) => {
     const review = {
       customerName: user.displayName,
+      image:user.photoURL,
       customerEmail: user.email,
       rating: selectedRating,
       feedback: data.feedback,

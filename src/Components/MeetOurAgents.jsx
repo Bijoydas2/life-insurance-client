@@ -9,7 +9,7 @@ const MeetOurAgents = () => {
   const { data: agents = [], isLoading } = useQuery({
     queryKey: ['agents'],
     queryFn: async () => {
-      const res = await axiosInstance.get('/agents');
+      const res = await axiosInstance.get('/agents/top');
       return res.data;
     }
   });

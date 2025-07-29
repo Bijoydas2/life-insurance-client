@@ -54,7 +54,7 @@ const LatestBlogs = () => {
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
 
               <div className="absolute bottom-3 left-4 right-4 flex justify-between items-center text-white">
-                <h3 className="text-lg text-secondary font-semibold line-clamp-2 drop-shadow-md">
+                <h3 className="text-lg  font-semibold line-clamp-2 drop-shadow-md">
                   {blog.title}
                 </h3>
                 <div className="flex items-center gap-2 text-sm font-medium drop-shadow-md">
