@@ -8,25 +8,29 @@ const AllPolicies = () => {
   const axiosInstance = UseAxios();
 
   const [page, setPage] = useState(1);
-  const [category, setCategory] = useState("");
   const [search, setSearch] = useState("");
+  const [sortOption, setSortOption] = useState("");
 
   const { data, isLoading } = useQuery({
-    queryKey: ["policies", page, category, search],
+    queryKey: ["policies", page, search, sortOption],
     queryFn: async () => {
       const res = await axiosInstance.get(
-        `/policies?page=${page}&limit=9&category=${category}&search=${search}`
+        `/policies?page=${page}&limit=9&search=${search}`
       );
-      return res.data;
+      let policies = res.data.policies || [];
+
+      // Sorting logic
+      if (sortOption === "priceLowHigh") {
+        policies.sort((a, b) => a.basePremium - b.basePremium);
+      } else if (sortOption === "priceHighLow") {
+        policies.sort((a, b) => b.basePremium - a.basePremium);
+      }
+
+      return { ...res.data, policies };
     },
   });
 
   const { policies = [], totalPages = 1 } = data || {};
-
-  const handleCategoryChange = (e) => {
-    setCategory(e.target.value);
-    setPage(1);
-  };
 
   const handleSearchSubmit = (e) => {
     e.preventDefault();
@@ -41,31 +45,30 @@ const AllPolicies = () => {
         All Policies
       </h2>
 
-      {/* Filter + Search */}
-       <div className="flex flex-col sm:flex-row justify-between gap-4 mb-6">
-        <select
-          value={category}
-          onChange={handleCategoryChange}
-          className="border text-gray-400 p-2 rounded w-full sm:w-auto"
-        >
-          <option value="">All Categories</option>
-          <option value="Term Life">Term Life</option>
-          <option value="Senior Plan">Senior Plan</option>
-          <option value="Family">Family</option>
-        </select>
-
+      {/* Search + Sort */}
+      <div className="flex flex-col sm:flex-row justify-between gap-4 mb-6">
         <form onSubmit={handleSearchSubmit} className="flex gap-2 w-full sm:w-auto">
           <input
             type="text"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search by title"
-            className="border p-2 text-white rounded w-full"
+            className="border p-2 rounded w-full"
           />
           <button type="submit" className="bg-primary text-white px-4 rounded">
             Search
           </button>
         </form>
+
+        <select
+          value={sortOption}
+          onChange={(e) => setSortOption(e.target.value)}
+          className="border p-2 rounded w-full sm:w-auto"
+        >
+          <option value="">Sort by Price</option>
+          <option value="priceLowHigh">Low to High</option>
+          <option value="priceHighLow">High to Low</option>
+        </select>
       </div>
 
       {/* Policy Cards */}
@@ -73,7 +76,7 @@ const AllPolicies = () => {
         {policies.map((policy) => (
           <div
             key={policy._id}
-            className="group relative bg-white rounded-3xl shadow-md hover:shadow-2xl transition-shadow duration-300 flex flex-col overflow-hidden"
+            className="group relative bg-white rounded-3xl shadow-md hover:shadow-2xl transition-shadow duration-300 flex flex-col overflow-hidden h-full"
           >
             {/* Image with overlay */}
             <div className="relative h-52 overflow-hidden rounded-t-3xl">
@@ -95,6 +98,7 @@ const AllPolicies = () => {
               <p className="text-gray-600 text-sm mb-4 line-clamp-3">
                 {policy.description?.slice(0, 120) || "No description"}
               </p>
+              <p className="text-primary font-bold mb-4">${policy.basePremium}</p>
 
               <div className="mt-auto">
                 <Link
@@ -111,7 +115,6 @@ const AllPolicies = () => {
 
       {/* Pagination */}
       <div className="flex justify-center mt-12 gap-2 flex-wrap">
-        {/* Prev */}
         <button
           onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
           disabled={page === 1}
@@ -124,7 +127,6 @@ const AllPolicies = () => {
           Prev
         </button>
 
-        {/* Page numbers */}
         {Array.from({ length: totalPages }, (_, idx) => idx + 1).map((pg) => (
           <button
             key={pg}
@@ -139,7 +141,6 @@ const AllPolicies = () => {
           </button>
         ))}
 
-        {/* Next */}
         <button
           onClick={() => setPage((prev) => Math.min(prev + 1, totalPages))}
           disabled={page === totalPages}

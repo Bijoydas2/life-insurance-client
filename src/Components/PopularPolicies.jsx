@@ -35,19 +35,19 @@ const PopularPolicies = () => {
         {policies.map((policy) => (
           <div
             key={policy._id}
-            className="group relative bg-white rounded-3xl shadow-md hover:shadow-2xl transition-shadow duration-300 flex flex-col overflow-hidden"
+            className="group relative bg-white rounded-3xl shadow-md hover:shadow-2xl transition-shadow duration-300 flex flex-col overflow-hidden h-full"
           >
             {/* Image & overlay */}
             <div className="relative h-52 overflow-hidden rounded-t-3xl">
               <img
                 src={policy.image}
                 alt={policy.title}
-                className="w-full h-full object-cover  transform group-hover:scale-105 transition-transform duration-500"
+                className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
 
               <div className="absolute bottom-3 left-4 right-4 text-white">
-                <h3 className="text-lg font-bold  line-clamp-2 drop-shadow">
+                <h3 className="text-lg font-bold line-clamp-2 drop-shadow">
                   {policy.title}
                 </h3>
               </div>
@@ -71,9 +71,10 @@ const PopularPolicies = () => {
                 </span>
               </div>
 
+              {/* “See more” button */}
               <Link
                 to={`/policy/${policy._id}`}
-                className="inline-block bg-primary hover:bg-secondary text-white py-3 rounded-full text-center font-semibold transition-colors duration-300 shadow-md"
+                className="mt-auto inline-block bg-primary hover:bg-secondary text-white py-3 rounded-full text-center font-semibold transition-colors duration-300 shadow-md"
               >
                 View Details
               </Link>
