@@ -9,6 +9,7 @@ import { ToastContainer } from 'react-toastify';
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import Loading from './Components/Loading.jsx';
+import { ThemeProvider } from './Context/ThemeContext.jsx';
 
 const queryClient = new QueryClient();
 
@@ -16,10 +17,12 @@ createRoot(document.getElementById('root')).render(
   <StrictMode>
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
-       <Suspense fallback={<Loading />}>
+       <ThemeProvider>
+        <Suspense fallback={<Loading />}>
        <RouterProvider router={router} />
       </Suspense>
         <ToastContainer />
+       </ThemeProvider>
       </AuthProvider>
     </QueryClientProvider>
   </StrictMode>
