@@ -29,6 +29,7 @@ import AgentRoute from "../Route/AgentRoute";
 import DashboardHome from "../Pages/Dashboard/DashboardHome/DashboardHome";
 import Forbidden  from "../Pages/Forbidden/Forbidden"
 import ErrorPage from "../Pages/Error/ErrorPage";
+import ProfileCard from "../Components/ProfileCard"
 
 
 export const router = createBrowserRouter([
@@ -95,6 +96,11 @@ export const router = createBrowserRouter([
     {
     index:true,
     Component:DashboardHome
+
+    },
+    {
+      path: 'profile-page',
+      Component:ProfileCard
 
     },
       // admin

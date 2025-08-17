@@ -11,6 +11,7 @@ import {
   FaCreditCard,
   FaClipboardCheck,
   FaHome,
+  FaUser,
 } from "react-icons/fa";
 
 import useUserRole from "../hooks/UseUserRole";
@@ -81,6 +82,10 @@ const DashboardLayout = () => {
                   <FaHome className="text-lg" />
                   <span>Home</span>
                 </NavLink>
+               <NavLink to="/dashboard/profile-page" className={navLinkClass}>
+               <FaUser className="text-lg" />
+               <span>Profile</span>
+              </NavLink>
 
                 <NavLink to="/dashboard/applications" className={navLinkClass}>
                   <FaClipboardList className="text-lg" />
@@ -119,6 +124,10 @@ const DashboardLayout = () => {
                   <FaHome className="text-lg" />
                   <span>Home</span>
                 </NavLink>
+              <NavLink to="/dashboard/profile-page" className={navLinkClass}>
+              <FaUser className="text-lg" />
+               <span>Profile</span>
+             </NavLink>
 
                 <NavLink to="/dashboard/assigned" className={navLinkClass}>
                   <FaTasks className="text-lg" />
@@ -150,6 +159,10 @@ const DashboardLayout = () => {
                   <FaHome className="text-lg" />
                   <span>Home</span>
                 </NavLink>
+                  <NavLink to="/dashboard/profile-page" className={navLinkClass}>
+                 <FaUser className="text-lg" />
+                <span>Profile</span>
+                </NavLink>
 
                 <NavLink to="/dashboard/my-applications" className={navLinkClass}>
                   <FaUserCheck className="text-lg" />
@@ -174,4 +187,4 @@ const DashboardLayout = () => {
   );
 };
 
-export default DashboardLayout;
+export default DashboardLayout; 
