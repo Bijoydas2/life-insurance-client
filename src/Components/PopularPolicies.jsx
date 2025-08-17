@@ -83,7 +83,7 @@ const PopularPolicies = () => {
         ))}
       </div>
 
-      <div className="text-center mt-16">
+      <div className="text-center mt-10">
         <Link
           to="/allPolicies"
           className="inline-block bg-primary px-10 py-3 rounded-full text-white font-bold hover:bg-secondary transition-colors duration-300 shadow-lg"

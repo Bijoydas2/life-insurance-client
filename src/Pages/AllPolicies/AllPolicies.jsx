@@ -19,7 +19,6 @@ const AllPolicies = () => {
       );
       let policies = res.data.policies || [];
 
-      // Sorting logic
       if (sortOption === "priceLowHigh") {
         policies.sort((a, b) => a.basePremium - b.basePremium);
       } else if (sortOption === "priceHighLow") {
@@ -85,11 +84,9 @@ const AllPolicies = () => {
                 alt={policy.title}
                 className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-              <div className="absolute bottom-3 left-4 right-4 text-white">
-                <h3 className="text-lg font-semibold line-clamp-2 drop-shadow">
-                  {policy.title}
-                </h3>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+              <div className="absolute bottom-3 left-4 text-white font-bold text-lg drop-shadow-lg">
+                {policy.title}
               </div>
             </div>
 
@@ -98,16 +95,19 @@ const AllPolicies = () => {
               <p className="text-gray-600 text-sm mb-4 line-clamp-3">
                 {policy.description?.slice(0, 120) || "No description"}
               </p>
-              <p className="text-primary font-bold mb-4">${policy.basePremium}</p>
-
-              <div className="mt-auto">
-                <Link
-                  to={`/policy/${policy._id}`}
-                  className="block bg-primary hover:bg-secondary text-white text-center py-3 rounded-full font-semibold transition duration-300 shadow-md"
-                >
-                  View Details
-                </Link>
+              <div className="flex justify-between items-center mb-4">
+                <span className="text-primary font-bold">${policy.basePremium}</span>
+                <span className="text-gray-500 text-sm">
+                  Age: {policy.minAge}-{policy.maxAge}
+                </span>
               </div>
+
+              <Link
+                to={`/policy/${policy._id}`}
+                className="mt-auto block bg-primary hover:bg-secondary text-white py-3 rounded-full text-center font-semibold transition-colors duration-300 shadow-md"
+              >
+                View Details
+              </Link>
             </div>
           </div>
         ))}
