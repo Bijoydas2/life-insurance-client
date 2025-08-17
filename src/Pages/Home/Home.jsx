@@ -5,6 +5,7 @@ import LatestBlogs from '../../Components/LatestBlogs';
 import NewsletterForm from '../../Components/NewsletterForm';
 import MeetOurAgents from '../../Components/MeetOurAgents';
 import HeroCarousel from '../../Components/HeroCarousel';
+import RecentPolicies from '../../Components/RecentPolicies';
 
 
 const Home = () => {
@@ -13,6 +14,7 @@ const Home = () => {
             <title>Life Secure</title>
             <HeroCarousel/>
             <PopularPolicies/>
+            <RecentPolicies />
             <CustomerReviews/>
             <LatestBlogs/>
             <NewsletterForm/>
