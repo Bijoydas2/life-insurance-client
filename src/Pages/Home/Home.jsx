@@ -6,6 +6,7 @@ import NewsletterForm from '../../Components/NewsletterForm';
 import MeetOurAgents from '../../Components/MeetOurAgents';
 import HeroCarousel from '../../Components/HeroCarousel';
 import RecentPolicies from '../../Components/RecentPolicies';
+import FAQSection from '../../Components/FAQSection';
 
 
 const Home = () => {
@@ -16,6 +17,7 @@ const Home = () => {
             <PopularPolicies/>
             <RecentPolicies />
             <CustomerReviews/>
+            <FAQSection />
             <LatestBlogs/>
             <NewsletterForm/>
             <MeetOurAgents/>

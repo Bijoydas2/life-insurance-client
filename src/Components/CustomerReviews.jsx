@@ -55,7 +55,7 @@ const CustomerReviews = () => {
       >
         {reviews.map(({ _id, customerName,rating,feedback,image }) => (
           <SwiperSlide key={_id}>
-            <div className="bg-white p-6 rounded-2xl shadow-md hover:shadow-lg border border-secondary transition duration-300 h-full flex flex-col">
+            <div className="bg-white p-6 rounded-2xl shadow-md hover:shadow-lg   transition duration-300 h-full flex flex-col">
               <div className="flex items-center gap-4 mb-4">
                 <img
                   src={image || `https://ui-avatars.com/api/?name=${name}`}
