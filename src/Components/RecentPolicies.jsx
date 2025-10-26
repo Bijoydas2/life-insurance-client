@@ -27,8 +27,8 @@ const RecentPolicies = () => {
 
   return (
     <section className="mt-16 max-w-7xl mx-auto px-6">
-      <h2 className="text-4xl font-extrabold text-center text-primary mb-14 flex items-center justify-center gap-3">
-        <FaClock className="text-blue-600 animate-pulse text-2xl" />
+      <h2 className="text-4xl font-extrabold text-center text-[#27445D] mb-14 flex items-center justify-center gap-3">
+        <FaClock className="text-primary animate-pulse text-2xl" />
         Recent Policies
       </h2>
 
@@ -74,7 +74,7 @@ const RecentPolicies = () => {
               {/* “See more” button */}
               <Link
                 to={`/policy/${policy._id || policy.title}`} // যদি _id না থাকে, title বা slug use করতে পারো
-                className="mt-auto inline-block bg-primary hover:bg-secondary text-white py-3 rounded-full text-center font-semibold transition-colors duration-300 shadow-md"
+                 className="btn bg-primary text-white hover:bg-white hover:text-primary border-2 border-primary px-6 py-3 rounded-lg transition duration-300"
               >
                 View Details
               </Link>

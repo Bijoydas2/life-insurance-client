@@ -46,8 +46,8 @@ const Navbar = () => {
   );
 
   return (
-    <nav className="bg-indigo-50 dark:bg-gray-900 shadow sticky top-0 z-50 transition-colors">
-      <div className="max-w-7xl mx-auto px-4 py-4 lg:py-6 flex justify-between items-center">
+    <nav className="bg-indigo-100 dark:bg-gray-900 shadow sticky top-0 z-50 transition-colors">
+      <div className="max-w-7xl mx-auto px-4 py-3 lg:py-3 flex justify-between items-center">
 
         {/* Logo */}
         <div className="flex items-center gap-2 text-blue-600 dark:text-white text-xl font-bold">

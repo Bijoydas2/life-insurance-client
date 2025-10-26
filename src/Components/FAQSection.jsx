@@ -30,7 +30,7 @@ const FAQSection = () => {
     <section className="max-w-7xl mx-auto px-6 mt-16">
       <h2 className="text-4xl font-extrabold text-center text-primary mb-10">
         Frequently Asked Questions
-      </h2>
+      </h2> 
       <div className="space-y-4">
         {faqData.map((item, index) => (
           <div key={index} className="border rounded-lg overflow-hidden">

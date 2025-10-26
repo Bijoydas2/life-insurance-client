@@ -4,16 +4,17 @@ import CustomerReviews from '../../Components/CustomerReviews';
 import LatestBlogs from '../../Components/LatestBlogs';
 import NewsletterForm from '../../Components/NewsletterForm';
 import MeetOurAgents from '../../Components/MeetOurAgents';
-import HeroCarousel from '../../Components/HeroCarousel';
 import RecentPolicies from '../../Components/RecentPolicies';
 import FAQSection from '../../Components/FAQSection';
+import LandingPage from '../../Components/LandingPage';
+
 
 
 const Home = () => {
     return (
         <div>
             <title>Life Secure</title>
-            <HeroCarousel/>
+            <LandingPage/>
             <PopularPolicies/>
             <RecentPolicies />
             <CustomerReviews/>
