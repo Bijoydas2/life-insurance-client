@@ -74,7 +74,7 @@ const DashboardLayout = () => {
           <nav className="space-y-3 mt-10">
             {!isLoading && role === "admin" && (
               <>
-                <h2 className="text-2xl font-bold mb-10 text-primary tracking-wide">
+                <h2 className="text-2xl font-bold mb-10 text-[#27445D] tracking-wide">
                   Admin Panel
                 </h2>
 
@@ -116,7 +116,7 @@ const DashboardLayout = () => {
 
             {role === "agent" && (
               <>
-                <h2 className="text-2xl font-bold mb-10 text-primary tracking-wide">
+                <h2 className="text-2xl font-bold mb-10 text-[#27445D]tracking-wide">
                   Agent Panel
                 </h2>
 
@@ -151,7 +151,7 @@ const DashboardLayout = () => {
 
             {role === "customer" && (
               <>
-                <h2 className="text-2xl font-bold mb-5 text-primary tracking-wide">
+                <h2 className="text-2xl font-bold mb-5 text-[#27445D]tracking-wide">
                   Customer Panel
                 </h2>
 

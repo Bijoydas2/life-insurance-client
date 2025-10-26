@@ -19,6 +19,7 @@
     "daisyui": "^5.0.46",
     "date-fns": "^4.1.0",
     "firebase": "^11.10.0",
+    "framer-motion": "^12.23.24",
     "lottie-react": "^2.4.1",
     "react": "^19.1.0",
     "react-datepicker": "^8.4.0",

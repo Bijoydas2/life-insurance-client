@@ -1,22 +1,26 @@
-import React, { useState } from "react";
-import { useNavigate, useLocation } from "react-router";
+import React, { useState, useContext } from "react";
+import { useNavigate, useLocation } from "react-router"; 
 import { useForm } from "react-hook-form";
+import { ThemeContext } from "../../Context/ThemeContext";
 
 const QuotePage = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const policyId = location.state?.policyId;
 
+  const { theme } = useContext(ThemeContext);
+  const dark = theme === "dark";
+
   const {
     register,
     handleSubmit,
     formState: { errors },
-    
   } = useForm();
 
   const [premium, setPremium] = useState(null);
 
   const calculatePremium = (data) => {
+    
     const baseRate = 500;
     const ageFactor = data.age / 100;
     const coverageFactor = data.coverageAmount / 1000000;
@@ -42,18 +46,27 @@ const QuotePage = () => {
 
   return (
     <div
-      className="max-w-lg mx-auto p-6 bg-white rounded shadow my-12"
-      style={{ color: "var(--color-primary)" }}
+      className={`max-w-lg mx-auto p-8 rounded-xl shadow-2xl my-12 transition-colors duration-300 ${
+        dark ? "bg-[#1e293b] shadow-gray-900/50" : "bg-white shadow-lg"
+      }`}
     >
-        <title>Get Quote</title>
-      <h2 className="text-3xl font-bold mb-6 text-center" style={{ color: "var(--color-primary)" }}>
+      <h2
+        className={`text-3xl font-bold mb-8 text-center transition-colors duration-300 ${
+          dark ? "text-primary-light" : "text-primary"
+        }`}
+      >
         Get Your Quote
       </h2>
 
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
         {/* Age */}
         <div>
-          <label className="block mb-1 font-semibold text-gray-700" htmlFor="age">
+          <label
+            className={`block mb-2 font-semibold ${
+              dark ? "text-gray-200" : "text-gray-700"
+            }`}
+            htmlFor="age"
+          >
             Age
           </label>
           <input
@@ -64,34 +77,71 @@ const QuotePage = () => {
               min: { value: 18, message: "Minimum age is 18" },
               max: { value: 100, message: "Maximum age is 100" },
             })}
-            className="w-full border rounded p-2 text-gray-700"
+            className={`w-full border rounded-lg p-3 transition-colors duration-300 ${
+              dark
+                ? "bg-gray-700 border-gray-600 text-white placeholder-gray-400 focus:border-primary-light"
+                : "bg-white border-gray-300 text-gray-800 focus:border-primary"
+            }`}
             placeholder="Enter your age"
           />
           {errors.age && (
-            <p className="text-red-600 text-sm mt-1">{errors.age.message}</p>
+            <p className="text-red-500 text-sm mt-1">{errors.age.message}</p>
           )}
         </div>
 
-        {/* Gender */}
-        <div>
-          <label className="block mb-1 font-semibold text-gray-700">Gender</label>
-          <select
-            {...register("gender", { required: "Gender is required" })}
-            className="w-full border rounded p-2 text-gray-700"
-          >
-            <option value="">Select Gender</option>
-            <option value="male">Male</option>
-            <option value="female">Female</option>
-            <option value="other">Other</option>
-          </select>
-          {errors.gender && (
-            <p className="text-red-600 text-sm mt-1">{errors.gender.message}</p>
-          )}
-        </div>
+        {/* Gender & Other Select fields */}
+        {[
+          { name: "gender", label: "Gender", options: [
+            { value: "male", label: "Male" }, 
+            { value: "female", label: "Female" }, 
+            { value: "other", label: "Other" }
+          ]},
+          { name: "duration", label: "Duration (years)", options: [
+            { value: "10", label: "10 Years" }, 
+            { value: "15", label: "15 Years" }, 
+            { value: "20", label: "20 Years" }, 
+            { value: "25", label: "25 Years" }
+          ]},
+          { name: "smoker", label: "Smoker", options: [
+            { value: "yes", label: "Smoker" }, 
+            { value: "no", label: "Non-Smoker" }
+          ]}
+        ].map(({ name, label, options }) => (
+          <div key={name}>
+            <label
+              className={`block mb-2 font-semibold ${
+                dark ? "text-gray-200" : "text-gray-700"
+              }`}
+            >
+              {label}
+            </label>
+            <select
+              {...register(name, { required: `${label} is required` })}
+              className={`w-full border rounded-lg p-3 appearance-none transition-colors duration-300 ${
+                dark
+                  ? "bg-gray-700 border-gray-600 text-white focus:border-primary-light"
+                  : "bg-white border-gray-300 text-gray-800 focus:border-primary"
+              }`}
+            >
+              <option value="">Select {label}</option>
+              {options.map(option => (
+                <option key={option.value} value={option.value}>{option.label}</option>
+              ))}
+            </select>
+            {errors[name] && (
+              <p className="text-red-500 text-sm mt-1">{errors[name].message}</p>
+            )}
+          </div>
+        ))}
 
         {/* Coverage Amount */}
         <div>
-          <label className="block mb-1 font-semibold text-gray-700" htmlFor="coverageAmount">
+          <label
+            className={`block mb-2 font-semibold ${
+              dark ? "text-gray-200" : "text-gray-700"
+            }`}
+            htmlFor="coverageAmount"
+          >
             Coverage Amount (৳)
           </label>
           <input
@@ -101,56 +151,24 @@ const QuotePage = () => {
               required: "Coverage amount is required",
               min: { value: 100000, message: "Minimum coverage is 100,000" },
             })}
-            className="w-full border rounded p-2 text-gray-700"
+            className={`w-full border rounded-lg p-3 transition-colors duration-300 ${
+                dark
+                  ? "bg-gray-700 border-gray-600 text-white placeholder-gray-400 focus:border-primary-light"
+                  : "bg-white border-gray-300 text-gray-800 focus:border-primary"
+              }`}
             placeholder="E.g., 2000000"
           />
           {errors.coverageAmount && (
-            <p className="text-red-600 text-sm mt-1">{errors.coverageAmount.message}</p>
-          )}
-        </div>
-
-        {/* Duration */}
-        <div>
-          <label className="block mb-1 font-semibold text-gray-700">Duration (years)</label>
-          <select
-            {...register("duration", { required: "Duration is required" })}
-            className="w-full border rounded p-2 text-gray-700"
-          >
-            <option value="">Select Duration</option>
-            <option value="10">10 Years</option>
-            <option value="15">15 Years</option>
-            <option value="20">20 Years</option>
-            <option value="25">25 Years</option>
-          </select>
-          {errors.duration && (
-            <p className="text-red-600 text-sm mt-1">{errors.duration.message}</p>
-          )}
-        </div>
-
-        {/* Smoker */}
-        <div>
-          <label className="block mb-1 font-semibold text-gray-700">Smoker</label>
-          <select
-            {...register("smoker", { required: "Please select an option" })}
-            className="w-full border rounded p-2 text-gray-700"
-          >
-            <option value="">Select Option</option>
-            <option value="yes">Smoker</option>
-            <option value="no">Non-Smoker</option>
-          </select>
-          {errors.smoker && (
-            <p className="text-red-600 text-sm mt-1">{errors.smoker.message}</p>
+            <p className="text-red-500 text-sm mt-1">
+              {errors.coverageAmount.message}
+            </p>
           )}
         </div>
 
         {/* Submit */}
         <button
           type="submit"
-          className="w-full py-3 rounded font-semibold transition"
-          style={{
-            backgroundColor: "var(--color-primary)",
-            color: "white",
-          }}
+          className="w-full py-3 rounded-lg font-semibold text-white bg-primary hover:bg-primary-dark transition duration-300"
         >
           Calculate Premium
         </button>
@@ -159,17 +177,24 @@ const QuotePage = () => {
       {/* Display Premium */}
       {premium && (
         <div
-          className="mt-6 border rounded p-4 text-center"
-          style={{ borderColor: "var(--color-secondary)", backgroundColor: "#FFF9F2" }}
+          className={`mt-8 border-2 rounded-xl p-6 text-center shadow-inner transition-colors duration-300 ${
+            dark
+              ? "bg-gray-700 border-primary-light text-gray-200"
+              : "bg-green-50 border-green-400 text-gray-800"
+          }`}
         >
-          <p className="text-lg font-semibold mb-2" style={{ color: "var(--color-primary)" }}>
+          <p
+            className={`text-xl font-bold mb-3 ${
+              dark ? "text-primary-light" : "text-primary"
+            }`}
+          >
             Estimated Premium
           </p>
-          <p>
-            Monthly: <strong>৳{premium.monthly}</strong>
+          <p className="text-lg mb-1">
+            Monthly: <strong className="text-2xl text-green-600 dark:text-yellow-400">৳{premium.monthly}</strong>
           </p>
-          <p>
-            Annual: <strong>৳{premium.annual}</strong>
+          <p className="text-lg">
+            Annual: <strong className="text-2xl text-green-600 dark:text-yellow-400">৳{premium.annual}</strong>
           </p>
 
           {/* Apply Button */}
@@ -179,11 +204,7 @@ const QuotePage = () => {
                 state: { ...premium.formData, policyId },
               })
             }
-            className="mt-4 px-6 py-2 rounded font-semibold transition"
-            style={{
-              backgroundColor: "var(--color-secondary)",
-              color: "white",
-            }}
+            className="mt-5 px-8 py-3 rounded-lg font-semibold text-white bg-secondary hover:bg-secondary-dark transition duration-300 shadow-md"
           >
             Apply for Policy
           </button>

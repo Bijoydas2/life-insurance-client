@@ -47,7 +47,7 @@ const Navbar = () => {
 
   return (
     <nav className="bg-indigo-100 dark:bg-gray-900 shadow sticky top-0 z-50 transition-colors">
-      <div className="max-w-7xl mx-auto px-4 py-3 lg:py-3 flex justify-between items-center">
+      <div className="max-w-7xl mx-auto px-6 py-3 lg:py-3 flex justify-between items-center">
 
         {/* Logo */}
         <div className="flex items-center gap-2 text-blue-600 dark:text-white text-xl font-bold">
@@ -64,7 +64,7 @@ const Navbar = () => {
   {/* Theme Toggle */}
   <button
     onClick={toggleTheme}
-    className="text-2xl p-2 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-full transition"
+    className="text-2xl p-2 hover:bg-gray-300  rounded-full transition"
     aria-label="Toggle Theme"
   >
     {theme === "light" ? (

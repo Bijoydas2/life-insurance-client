@@ -62,7 +62,7 @@ const ManageApplications = () => {
       <div className="overflow-x-auto">
         <table className="min-w-full table-auto bg-white shadow-md rounded-lg text-sm md:text-base">
           <thead>
-            <tr className="bg-secondary text-white">
+            <tr className="bg-primary text-white">
               <th className="py-3 px-4 text-left">Applicant</th>
               <th className="py-3 px-4 text-left">Policy</th>
               <th className="py-3 px-4 text-left hidden sm:table-cell">Date</th>

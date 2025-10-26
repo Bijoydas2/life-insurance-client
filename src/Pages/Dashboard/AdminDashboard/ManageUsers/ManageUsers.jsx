@@ -84,7 +84,7 @@ const ManageUsers = () => {
         <div className="overflow-x-auto">
           <table className="min-w-full bg-white rounded shadow text-sm sm:text-base">
             <thead>
-              <tr className="bg-secondary text-white whitespace-nowrap">
+              <tr className="bg-primary text-white whitespace-nowrap">
                 <th className="py-3 px-4 text-left">User</th>
                 <th className="py-3 px-4 text-left">Email</th>
                 <th className="py-3 px-4 text-left">Role</th>

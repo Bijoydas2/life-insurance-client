@@ -22,12 +22,12 @@ const LandingPage = () => {
   }, []);
 
   const slides = [
-    { src: "https://i.ibb.co.com/nsYm6vcM/Bike-1.png", title: "Health Coverage" },
-    { src: "https://i.ibb.co.com/KzbtHDgP/cng.webp", title: "Family Protection" },
-    { src: "https://i.ibb.co.com/HTvxSpFd/car.png", title: "Accident Insurance" },
-    { src: "https://i.ibb.co.com/sdTWJXgN/Bangladesh-Ace-EX2-Intra-V20-Yodha-31-SC-20240918-jpg.webp", title: "Life Assurance" },
-    { src: "https://i.ibb.co.com/wNWF0ZS0/Am.png", title: "Emergency Support" },
-    { src: "https://i.ibb.co.com/tMwfhQZQ/BigCar.png", title: "Savings Plans" },
+    { src: "https://i.ibb.co.com/9HrkqM3V/pexels-karola-g-4021809.jpg", title: "Health Coverage" },
+    { src: "https://i.ibb.co.com/tpGZYKt8/pexels-vika-glitter-392079-1648387-1.jpg", title: "Family Protection" },
+    { src: "https://i.ibb.co.com/4nT22gJn/pexels-pixabay-163016.jpg", title: "Accident Insurance" },
+    { src: "https://i.ibb.co.com/YBnbh3Kr/pexels-olly-3760067-1.jpg", title: "Life Assurance" },
+    { src: "https://i.ibb.co.com/gpbP7Qn/pexels-kampus-8441861.jpg", title: "Emergency Support" },
+    { src: "https://i.ibb.co.com/nNppZVMv/pexels-pixabay-164652.jpg", title: "Savings Plans" },
   ];
 
   return (
@@ -153,7 +153,7 @@ const LandingPage = () => {
                     className="w-full h-64 object-cover"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
-                  <h2 className="absolute bottom-6 left-1/2 -translate-x-1/2 text-white text-xl md:text-2xl font-semibold tracking-wide bg-black/30 px-4 py-2 rounded-full backdrop-blur-sm">
+                  <h2 className="absolute bottom-6 left-1/2 -translate-x-1/2 text-white text-xl font-semibold tracking-wide px-4 py-2 rounded-full ">
                     {slide.title}
                   </h2>
                 </div>

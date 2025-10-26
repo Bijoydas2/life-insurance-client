@@ -1,14 +1,15 @@
 import React from "react";
 import PolicyRow from "./PolicyRow";
+import Loading from "../../../../Components/Loading";
 
 const PolicyTable = ({ policies, isLoading, onEdit }) => {
-  if (isLoading) return <p>Loading policies...</p>;
+  if (isLoading) return <Loading/>;
 
   return (
     <div className="overflow-x-auto">
       <table className="table w-full">
         <thead>
-          <tr className="bg-secondary text-white">
+          <tr className="bg-primary text-white">
             <td>#</td>
             <th>Title</th>
             <th>Category</th>

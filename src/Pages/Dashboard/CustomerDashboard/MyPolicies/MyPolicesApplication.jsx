@@ -44,7 +44,7 @@ const MyPoliciesApplication = () => {
       <div className="overflow-x-auto rounded-md border border-gray-300 shadow-sm">
         <table className="table-auto w-full min-w-[600px]">
           <thead>
-            <tr className="bg-secondary text-white text-sm sm:text-base">
+            <tr className="bg-primary text-white text-sm sm:text-base">
               <th className="px-3 py-2 text-left">Policy</th>
               <th className="px-3 py-2 text-left">Status</th>
               <th className="px-3 py-2 text-right">Premium</th>

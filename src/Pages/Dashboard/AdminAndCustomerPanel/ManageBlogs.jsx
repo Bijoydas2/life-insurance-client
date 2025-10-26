@@ -77,7 +77,7 @@ const ManageBlogs = () => {
       <div className="overflow-x-auto rounded shadow-sm border border-gray-200">
         <table className="table w-full min-w-[600px]">
           <thead>
-            <tr className="bg-secondary text-white">
+            <tr className="bg-primary text-white">
               <th className="whitespace-nowrap px-4 py-2">Title</th>
               <th className="whitespace-nowrap px-4 py-2">Author</th>
               <th className="whitespace-nowrap px-4 py-2">Email</th>

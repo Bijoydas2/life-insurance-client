@@ -137,7 +137,7 @@ const ClaimRequestPage = () => {
                         setSelectedPolicy(policy);
                         openModal();
                       }}
-                      className="mt-4 px-5 py-2 bg-primary text-white rounded-md shadow hover:bg-secondary transition w-full md:w-auto"
+                      className="mt-4 px-5 py-2 bg-primary text-white rounded-md shadow hover:bg-primary transition w-full md:w-auto"
                     >
                       Claim
                     </button>
@@ -177,14 +177,14 @@ const ClaimRequestPage = () => {
                 <div className="flex flex-col sm:flex-row justify-end gap-4">
                   <button
                     type="submit"
-                    className="btn bg-primary border-0 hover:bg-secondary text-white flex-1 sm:flex-none"
+                    className="btn bg-primary border-0 hover:bg-primary text-white flex-1 sm:flex-none"
                     disabled={fileUploading}
                   >
                     {fileUploading ? "Submitting..." : "Submit Claim"}
                   </button>
                   <button
                     type="button"
-                    className="btn bg-secondary border-0 text-white hover:bg-primary/10 flex-1 sm:flex-none"
+                    className="btn bg-primary border-0 text-white hover:bg-primary/10 flex-1 sm:flex-none"
                     onClick={() => {
                       closeModal();
                       setSelectedPolicy(null);

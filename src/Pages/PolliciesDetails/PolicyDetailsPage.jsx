@@ -1,14 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useNavigate, useParams } from "react-router";
 import { useQuery } from "@tanstack/react-query";
 import Loading from '../../Components/Loading';
 import useAxiosSecure from "../../hooks/useAxiosSecure";
-import { FaTags, FaClock, FaStar, FaUsers, FaUserAlt } from "react-icons/fa";
+import { FaTags, FaClock, FaStar, FaUserAlt } from "react-icons/fa";
+import { ThemeContext } from "../../Context/ThemeContext"; 
 
 const PolicyDetailsPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const axiosSecure = useAxiosSecure();
+  const { theme } = useContext(ThemeContext); 
+  const dark = theme === 'dark';
 
   const { data: policy, isLoading, error } = useQuery({
     queryKey: ["policy", id],
@@ -29,7 +32,7 @@ const PolicyDetailsPage = () => {
 
   const renderStars = (rating) => {
     const stars = [];
-    const fullStars = Math.floor(rating);
+    const roundedRating = Math.round(rating); 
     const maxStars = 5;
 
     for (let i = 1; i <= maxStars; i++) {
@@ -37,7 +40,7 @@ const PolicyDetailsPage = () => {
         <FaStar
           key={i}
           className={`inline-block text-xl ${
-            i <= fullStars ? "text-yellow-400" : "text-gray-300"
+            i <= roundedRating ? "text-yellow-400" : dark ? "text-gray-600" : "text-gray-300"
           }`}
           aria-label={`${i} star`}
         />
@@ -47,52 +50,67 @@ const PolicyDetailsPage = () => {
   };
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-10 my-12 bg-white rounded-lg shadow-md">
-      <title>Policy Details</title>
+    <div 
+      className={`max-w-6xl mx-auto px-4 py-10 my-12 rounded-lg shadow-xl transition-colors duration-300 ${
+        dark ? 'bg-[#1e293b]' : 'bg-white' 
+      }`}
+    >
+      
+      <h1 className="sr-only">Policy Details: {policy.title}</h1>
+      
       <div className="md:flex md:gap-10">
         {/* Image Section */}
         <div className="md:w-1/2">
           <img
             src={policy.image}
             alt={policy.title}
-            className="w-full h-[400px] object-cover rounded-lg shadow"
+            className="w-full h-[400px] object-cover rounded-lg shadow-lg"
           />
-           <h1 className="text-4xl font-bold  text-primary mt-6">{policy.title}</h1>
-            <p className="text-gray-700 mt-4">{policy.description}</p>
+          <h1 className={`text-4xl font-bold mt-6 ${dark ? 'text-primary-light' : 'text-primary'}`}>
+            {policy.title}
+          </h1>
+          <p className={`mt-4 ${dark ? 'text-gray-300' : 'text-gray-700'}`}>
+            {policy.description}
+          </p>
         </div>
 
         {/* Textual Info */}
-        <div className="md:w-1/2 mt-6 md:mt-0 flex flex-col justify-between" style={{ minHeight: "400px" }}>
+        <div className="md:w-1/2 mt-6 md:mt-0 flex flex-col justify-between">
           <div>
-           
-
-            <div className="grid grid-cols-1 gap-3 text-sm mb-6 text-gray-800">
-              <p className="flex items-center gap-2 font-semibold">
+            <h2 className={`text-2xl font-bold mb-4 ${dark ? 'text-white' : 'text-gray-800'}`}>Policy Snapshot</h2>
+            
+            {/* Key Information Grid */}
+            <div className="grid grid-cols-1 gap-4 text-sm mb-6">
+              {/* Category */}
+              <p className={`flex items-center gap-2 font-semibold ${dark ? 'text-gray-300' : 'text-gray-800'}`}>
                 <FaTags className="text-secondary" />
-                Category: {policy.category}
+                Category: <span className={`${dark ? 'text-white' : 'text-primary'}`}>{policy.category}</span>
               </p>
 
-              <p className="flex items-center gap-2 font-semibold">
+              {/* Age Eligibility */}
+              <p className={`flex items-center gap-2 font-semibold ${dark ? 'text-gray-300' : 'text-gray-800'}`}>
                 <FaUserAlt className="text-secondary" />
-                Age Eligibility: {policy.minAge} - {policy.maxAge} years
+                Age Eligibility: <span className={`${dark ? 'text-white' : 'text-primary'}`}>{policy.minAge} - {policy.maxAge} years</span>
               </p>
 
-              <p className="flex items-center gap-2 font-semibold">
+              {/* Coverage Range */}
+              <p className={`flex items-center gap-2 font-semibold ${dark ? 'text-gray-300' : 'text-gray-800'}`}>
                 <FaTags className="text-secondary" />
-                Coverage: ৳{policy.coverageRange.min.toLocaleString()} - ৳{policy.coverageRange.max.toLocaleString()}
+                Coverage: <span className={`${dark ? 'text-white' : 'text-primary'}`}>৳{policy.coverageRange.min.toLocaleString()} - ৳{policy.coverageRange.max.toLocaleString()}</span>
               </p>
 
-              <p className="flex items-center gap-2 font-semibold">
+              {/* Base Premium */}
+              <p className={`flex items-center gap-2 font-semibold ${dark ? 'text-gray-300' : 'text-gray-800'}`}>
                 <FaClock className="text-secondary" />
-                Base Premium: ৳{policy.basePremium}
+                Base Premium: <span className={`text-lg font-extrabold ${dark ? 'text-yellow-400' : 'text-green-600'}`}>৳{policy.basePremium}</span>
               </p>
 
               {/* Rating display */}
               {policy.rating !== undefined && (
-                <p className="flex items-center gap-2 font-semibold">
+                <p className={`flex items-center gap-2 font-semibold ${dark ? 'text-gray-300' : 'text-gray-800'}`}>
                   <FaStar className="text-yellow-400" />
                   <span>{renderStars(policy.rating)}</span>
-                  <span className="ml-2 text-gray-600">({policy.rating.toFixed(1)})</span>
+                  <span className={`ml-2 ${dark ? 'text-gray-400' : 'text-gray-600'}`}>({policy.rating.toFixed(1)})</span>
                 </p>
               )}
             </div>
@@ -100,8 +118,8 @@ const PolicyDetailsPage = () => {
             {/* Duration Options */}
             {policy.durationOptions?.length > 0 && (
               <div className="mb-4">
-                <h2 className="text-lg font-semibold text-primary mb-2">Duration Options</h2>
-                <ul className="list-disc pl-5 text-gray-700">
+                <h2 className={`text-lg font-semibold mb-2 ${dark ? 'text-white' : 'text-primary'}`}>Duration Options</h2>
+                <ul className={`list-disc pl-5 ${dark ? 'text-gray-300' : 'text-gray-700'}`}>
                   {policy.durationOptions.map((duration, index) => (
                     <li key={index}>{duration}</li>
                   ))}
@@ -112,8 +130,8 @@ const PolicyDetailsPage = () => {
             {/* Eligibility */}
             {policy.eligibility?.length > 0 && (
               <div className="mb-4">
-                <h2 className="text-lg font-semibold text-primary mb-2">Eligibility</h2>
-                <ul className="list-disc pl-5 text-gray-700">
+                <h2 className={`text-lg font-semibold mb-2 ${dark ? 'text-white' : 'text-primary'}`}>Eligibility</h2>
+                <ul className={`list-disc pl-5 ${dark ? 'text-gray-300' : 'text-gray-700'}`}>
                   {policy.eligibility.map((item, index) => (
                     <li key={index}>{item}</li>
                   ))}
@@ -124,8 +142,8 @@ const PolicyDetailsPage = () => {
             {/* Benefits */}
             {policy.benefits?.length > 0 && (
               <div className="mb-4">
-                <h2 className="text-lg font-semibold text-primary mb-2">Benefits</h2>
-                <ul className="list-disc pl-5 text-gray-700">
+                <h2 className={`text-lg font-semibold mb-2 ${dark ? 'text-white' : 'text-primary'}`}>Benefits</h2>
+                <ul className={`list-disc pl-5 ${dark ? 'text-gray-300' : 'text-gray-700'}`}>
                   {policy.benefits.map((benefit, index) => (
                     <li key={index}>{benefit}</li>
                   ))}
@@ -135,24 +153,24 @@ const PolicyDetailsPage = () => {
 
             {/* Premium Logic */}
             {policy.premiumLogic && (
-              <div className="p-4 bg-gray-100 border-l-4 border-secondary rounded mb-6">
-                <h2 className="text-lg font-semibold mb-2 text-primary">Premium Logic</h2>
-                <p className="text-gray-800">{policy.premiumLogic}</p>
+              <div className={`p-4 border-l-4 border-secondary rounded mb-6 ${dark ? 'bg-[#334155]' : 'bg-gray-100'}`}>
+                <h2 className={`text-lg font-semibold mb-2 ${dark ? 'text-white' : 'text-primary'}`}>Premium Logic</h2>
+                <p className={`${dark ? 'text-gray-300' : 'text-gray-800'}`}>{policy.premiumLogic}</p>
               </div>
             )}
           </div>
-          {/* Button */}
-          
         </div>
       </div>
+      
+      {/* Button */}
       <div className="flex justify-center mt-6">
-            <button
-              onClick={handleGetQuote}
-              className="btn btn-primary px-6 py-3 text-white font-semibold rounded-lg"
-            >
-              Get Quote
-            </button>
-          </div>
+        <button
+          onClick={handleGetQuote}
+          className="bg-primary hover:bg-primary-dark text-white font-semibold px-8 py-3 rounded-lg shadow-md transition duration-300"
+        >
+          Get Quote
+        </button>
+      </div>
     </div>
   );
 };

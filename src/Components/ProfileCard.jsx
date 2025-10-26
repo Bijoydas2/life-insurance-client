@@ -1,6 +1,7 @@
 import { FaEnvelope, FaClock } from "react-icons/fa";
 import UseAuth from "../hooks/UseAuth";
 import useUserRole from "../hooks/UseUserRole";
+import Loading from "./Loading";
 
 
 const ProfileCard = () => {
@@ -8,7 +9,7 @@ const ProfileCard = () => {
   const { role, isLoading: roleLoading } = useUserRole();
 
   if (roleLoading) {
-    return <p className="text-center mt-10">Loading...</p>;
+    return <Loading/>;
   }
 
   return (

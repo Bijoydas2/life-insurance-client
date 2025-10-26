@@ -134,7 +134,7 @@ const ManageTransactions = () => {
       {!isLoading && !isError && (
         <div className="overflow-x-auto">
           <table className="table  w-full">
-            <thead className="bg-secondary text-white">
+            <thead className="bg-primary text-white">
               <tr>
                 <th>Transaction ID</th>
                 <th>Customer Email</th>
