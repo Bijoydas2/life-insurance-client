@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 import UseAuth from './UseAuth';
 
 const axiosSecure = axios.create({
-  baseURL: 'https://life-insurance-app-server.vercel.app',
+  baseURL: `${import.meta.env.VITE_API_URL}`,
   withCredentials:true
 });
 

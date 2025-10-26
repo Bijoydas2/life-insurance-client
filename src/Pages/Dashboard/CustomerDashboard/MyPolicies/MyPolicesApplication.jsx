@@ -3,7 +3,8 @@ import { useQuery } from '@tanstack/react-query';
 import Swal from 'sweetalert2';
 import ReviewModal from './ReviewModel';
 import useAxiosSecure from '../../../../hooks/useAxiosSecure';
-import UseAuth from '../../../../hooks/useAuth';
+import UseAuth from '../../../../hooks/UseAuth';
+
 
 const MyPoliciesApplication = () => {
   const { user } = UseAuth();
