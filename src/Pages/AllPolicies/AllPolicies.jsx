@@ -40,7 +40,7 @@ const AllPolicies = () => {
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-10">
-      <h2 className="text-4xl text-primary font-bold mb-10 text-center">
+      <h2 className="text-4xl text-[#27445D] font-bold mb-10 text-center">
         All Policies
       </h2>
 
@@ -54,7 +54,7 @@ const AllPolicies = () => {
             placeholder="Search by title"
             className="border p-2 rounded w-full"
           />
-          <button type="submit" className="bg-primary text-white px-4 rounded">
+          <button type="submit"   className="btn bg-primary text-white hover:bg-white hover:text-primary border-2 border-primary px-6 py-3 rounded-lg transition duration-300">
             Search
           </button>
         </form>
@@ -104,7 +104,7 @@ const AllPolicies = () => {
 
               <Link
                 to={`/policy/${policy._id}`}
-                className="mt-auto block bg-primary hover:bg-secondary text-white py-3 rounded-full text-center font-semibold transition-colors duration-300 shadow-md"
+                 className="btn bg-primary text-white hover:bg-white hover:text-primary border-2 border-primary px-6 py-3 rounded-lg transition duration-300"
               >
                 View Details
               </Link>

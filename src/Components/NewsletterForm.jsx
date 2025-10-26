@@ -20,7 +20,7 @@ const NewsletterForm = () => {
   return (
     <section className="max-w-7xl mx-auto px-4 pt-12">
       <div className="bg-gradient-to-r from-indigo-50 via-white to-indigo-50 dark:from-gray-800 dark:to-gray-900 rounded-3xl shadow-lg hover:shadow-2xl transition-shadow duration-500 p-8">
-        <h3 className="text-3xl font-extrabold text-center text-primary mb-6">
+        <h3 className="text-3xl font-extrabold text-center text-[#27445D] mb-6">
           Subscribe to Our Newsletter
         </h3>
         <p className="text-center text-gray-600 dark:text-gray-300 mb-6">

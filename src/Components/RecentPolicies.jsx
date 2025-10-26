@@ -1,17 +1,28 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { FaClock } from "react-icons/fa";
 import { Link } from "react-router";
 import Loading from "./Loading";
 import UseAxios from "../hooks/UseAxios";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const RecentPolicies = () => {
   const axiosInstance = UseAxios();
 
+  // Initialize AOS
+  useEffect(() => {
+    AOS.init({
+      duration: 1000, // animation duration (ms)
+      offset: 100, // distance before the animation triggers
+      easing: "ease-in-out", // animation easing
+      once: true, // animate only once
+    });
+  }, []);
+
   const { data: policies = [], isLoading, isError } = useQuery({
     queryKey: ["recentPolicies"],
     queryFn: async () => {
-    
       const res = await axiosInstance.get("/policies/recent");
       return res.data;
     },
@@ -27,16 +38,25 @@ const RecentPolicies = () => {
 
   return (
     <section className="mt-16 max-w-7xl mx-auto px-6">
-      <h2 className="text-4xl font-extrabold text-center text-[#27445D] mb-14 flex items-center justify-center gap-3">
+      <h2
+        className="text-4xl font-extrabold text-center text-[#27445D] mb-14 flex items-center justify-center gap-3"
+        data-aos="fade-down"
+      >
         <FaClock className="text-primary animate-pulse text-2xl" />
         Recent Policies
       </h2>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-        {policies.map((policy) => (
+      <div
+        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
+        data-aos="fade-up"
+        data-aos-delay="200"
+      >
+        {policies.map((policy, index) => (
           <div
-            key={policy.createdAt} 
+            key={policy._id || policy.createdAt}
             className="group relative bg-white rounded-3xl shadow-md hover:shadow-2xl transition-shadow duration-300 flex flex-col overflow-hidden h-full"
+            data-aos="zoom-in"
+            data-aos-delay={index * 100} // stagger animation
           >
             {/* Image & overlay */}
             <div className="relative h-52 overflow-hidden rounded-t-3xl">
@@ -71,10 +91,9 @@ const RecentPolicies = () => {
                 </span>
               </div>
 
-              {/* “See more” button */}
               <Link
-                to={`/policy/${policy._id || policy.title}`} // যদি _id না থাকে, title বা slug use করতে পারো
-                 className="btn bg-primary text-white hover:bg-white hover:text-primary border-2 border-primary px-6 py-3 rounded-lg transition duration-300"
+                to={`/policy/${policy._id || policy.title}`}
+                className="btn bg-primary text-white hover:bg-white hover:text-primary border-2 border-primary px-6 py-3 rounded-lg transition duration-300"
               >
                 View Details
               </Link>

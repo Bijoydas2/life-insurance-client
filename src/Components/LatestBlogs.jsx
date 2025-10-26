@@ -34,8 +34,8 @@ const LatestBlogs = () => {
 
   return (
     <section className="max-w-7xl mx-auto px-6 mt-16">
-      <h2 className="text-4xl font-extrabold text-center text-primary mb-14">
-        Latest Articles
+      <h2 className="text-4xl font-extrabold text-center text-[#27445D] mb-14">
+        Latest Blogs
       </h2>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -81,7 +81,7 @@ const LatestBlogs = () => {
 
               <Link
                 to={`/blogs/${blog._id}`}
-                className="inline-block bg-primary hover:bg-secondary text-white py-3 rounded-full text-center font-semibold transition-colors duration-300 shadow-md"
+  className="btn bg-primary text-white hover:bg-white hover:text-primary border-2 border-primary px-6 py-3 rounded-lg transition duration-300"
               >
                 Read More
               </Link>
@@ -93,7 +93,7 @@ const LatestBlogs = () => {
       <div className="text-center mt-16">
         <Link
           to="/blogs"
-          className="inline-block bg-primary px-10 py-3 rounded-full text-white font-bold hover:bg-secondary transition-colors duration-300 shadow-lg"
+           className="btn bg-primary text-white hover:bg-white hover:text-primary border-2 border-primary px-6 py-3 rounded-lg transition duration-300"
         >
           View All Blogs
         </Link>
