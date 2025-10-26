@@ -17,7 +17,7 @@ const MainLayout = () => {
             <Navbar />
 
             <main className={`flex flex-col min-h-screen flex-grow transition-colors duration-500 ${
-                dark ? '' : 'bg-gradient-to-b from-primary/5 to-gray-50'
+                dark ? '' : 'bg-gradient-to-b from-primary/10 to-gray-50'
             }`}>
                 <Outlet />
             </main>

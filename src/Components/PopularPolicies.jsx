@@ -106,7 +106,7 @@ const PopularPolicies = () => {
               {/* Button */}
               <Link
                 to={`/policy/${policy._id}`}
-                className="mt-auto inline-block bg-primary text-white font-semibold text-center py-3 rounded-xl hover:bg-white hover:text-primary border-2 border-primary transition-all duration-300"
+                 className="btn bg-primary text-white hover:bg-white hover:text-primary border-2 border-primary px-6 py-3 rounded-lg transition duration-300 text-center"
               >
                 View Details
               </Link>

@@ -190,7 +190,7 @@ const Register = () => {
           <button
             type="submit"
             disabled={uploading}
-            className="w-full bg-primary text-white py-2 rounded hover:bg-blue-700 transition duration-200 disabled:opacity-50"
+            className="btn bg-primary w-full text-white hover:bg-white hover:text-primary border-2 border-primary px-6 py-3 rounded-lg transition duration-300  text-center"
           >
             Register
           </button>
