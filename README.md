@@ -6,7 +6,7 @@ A full-featured **MERN** stack life insurance management platform with role-base
 
 ## Live Website
 
-🔗 [https://life-insurance-app-ee9f3.web.app/](https://life-insurance-app-ee9f3.web.app/)
+🔗 [https://life-insurance-app-client.vercel.app/](/[)](https://life-insurance-app-client.vercel.app/)
 
 ### Screenshots
 
