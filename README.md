@@ -12,11 +12,11 @@ A full-featured **MERN** stack life insurance management platform with role-base
 
 > (Live site screenshots)
 
-![Home Screenshot](https://i.ibb.co/Wv9Rb5hH/Screenshot-2025-10-26-203423.png)
-
-![Dashboard Screenshot](https://i.ibb.co/dszkQZdv/Screenshot-2025-10-26-203542.png)
-
-![Policy Page Screenshot](https://i.ibb.co/b5MQ8gqm/Screenshot-2025-10-26-203752.png)
+<div style="display: flex; overflow-x: auto; gap: 10px;">
+  <img src="https://i.ibb.co/Wv9Rb5hH/Screenshot-2025-10-26-203423.png" width="400">
+  <img src="https://i.ibb.co/dszkQZdv/Screenshot-2025-10-26-203542.png" width="400">
+  <img src="https://i.ibb.co/b5MQ8gqm/Screenshot-2025-10-26-203752.png" width="400">
+</div>
 
 ---
 
