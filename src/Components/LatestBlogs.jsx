@@ -114,7 +114,7 @@ const LatestBlogs = () => {
 </div>
 
 
-      <div className="text-center mt-16" data-aos="fade-up">
+      <div className="text-center mt-10" data-aos="fade-up">
         <Link
           to="/blogs"
           className="btn bg-primary text-white hover:bg-white hover:text-primary border-2 border-primary px-6 py-3 rounded-lg transition duration-300"

@@ -7,7 +7,7 @@ import { Autoplay, Pagination, EffectFade } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/effect-fade";
-import { Link } from "react-router"; // Link is usually imported from react-router-dom
+import { Link } from "react-router"; 
 import { ThemeContext } from "../Context/ThemeContext";
 
 // Local assets
@@ -16,12 +16,12 @@ import heroLeft from "../assets/banner/banner2.jpg";
 import heroRight from "../assets/banner/banner3.jpg";
 
 const LandingPage = () => {
-  // Theme Context থেকে dark স্টেট ডিস্ট্রাকচার করা হলো
+
   const { theme } = useContext(ThemeContext);
   const dark = theme === "dark";
 
-  // মূল ব্র্যান্ড কালার
-  const primaryColor = dark ? 'text-cyan-400' : 'text-[#27445D]'; // Dark mode primary accent: Cyan
+  
+  const primaryColor = dark ? 'text-cyan-400' : 'text-[#27445D]'; 
   const darkBlue = '#27445D'; 
 
   useEffect(() => {
@@ -46,15 +46,15 @@ const LandingPage = () => {
                      px-8 md:px-12 py-10 overflow-hidden 
                      ${dark ? 'bg-gray-900 text-gray-100' : 'bg-white text-gray-800'}`}> 
       
-      {/* Background */}
+     
       <div className="absolute inset-0">
-        {/* Dynamic Background Gradient */}
+     
         <div className={`absolute inset-0 
                          ${dark 
                            ? 'bg-gradient-to-r from-gray-900/90 to-gray-800/80' 
                            : 'bg-gradient-to-r from-primary/30 to-gray-50/80'}`} 
         />
-        {/* Optional: Add a subtle texture/pattern for Dark Mode */}
+        
         {dark && (
           <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'url("https://www.transparenttextures.com/patterns/black-linen.png")' }}></div>
         )}
@@ -117,7 +117,7 @@ const LandingPage = () => {
                          }
             >
               <span 
-                className={`text-lg ${dark ? 'text-cyan-400' : 'text-[#27445D]'}`} // Icon color change
+                className={`text-lg ${dark ? 'text-cyan-400' : 'text-[#27445D]'}`} 
               >
                 {item.icon}
               </span>
@@ -155,7 +155,7 @@ const LandingPage = () => {
               className={`w-52 h-64 md:w-60 md:h-72 object-cover rounded-[2rem] 
                          shadow-[0_10px_25px_rgba(0,0,0,0.25)] transition-all duration-500 
                          hover:shadow-[0_20px_40px_rgba(0,0,0,0.35)] 
-                         ${dark ? 'border-2 border-gray-700' : 'border-2 border-white'}`} // Border color change
+                         ${dark ? 'border-2 border-gray-700' : 'border-2 border-white'}`} 
             />
           
             <div className="absolute inset-0 rounded-[2rem] bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
@@ -205,7 +205,7 @@ const LandingPage = () => {
                   
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
                   <h2 className={`absolute bottom-6 left-1/2 -translate-x-1/2 text-white text-xl font-semibold tracking-wide px-4 py-2 rounded-full 
-                      `} // 
+                      `} 
                   >
                     {slide.title}
                   </h2>

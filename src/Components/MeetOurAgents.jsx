@@ -48,7 +48,7 @@ const MeetOurAgents = () => {
         </h2>
         
       
-        <div className="grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-6">
+        <div className="grid md:grid-cols-4 sm:grid-cols-2 grid-cols-1 gap-6">
           {agents.map((agent, index) => (
             <div 
               key={agent._id} 

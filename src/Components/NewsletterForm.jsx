@@ -33,7 +33,7 @@ const NewsletterForm = () => {
   };
 
   return (
-    <section className="max-w-7xl mx-auto px-4 pt-12">
+    <section className="max-w-7xl mx-auto px-4 mt-16">
       <div
         className={` rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 p-8 ${
           dark ? 'shadow-xl bg-gradient-to-r from-gray-800  to-gray-900 shadow-gray-900/50' : 'bg-gradient-to-r from-indigo-50 via-white to-indigo-50'
