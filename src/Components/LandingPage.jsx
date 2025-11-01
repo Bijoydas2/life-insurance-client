@@ -1,18 +1,29 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import { FaShieldAlt, FaUsers, FaHeartbeat } from "react-icons/fa";
+import { FaShieldAlt, FaUsers, FaHeartbeat, FaArrowRight } from "react-icons/fa";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination, EffectFade } from "swiper/modules";
-import heroMain from "../assets/banner/banner1.jpg";
-import heroLeft from "../assets/banner/banner2.jpg";
-import heroRight from "../assets/banner/banner3.jpg";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/effect-fade";
-import { Link } from "react-router";
+import { Link } from "react-router"; // Link is usually imported from react-router-dom
+import { ThemeContext } from "../Context/ThemeContext";
+
+// Local assets
+import heroMain from "../assets/banner/banner1.jpg";
+import heroLeft from "../assets/banner/banner2.jpg";
+import heroRight from "../assets/banner/banner3.jpg";
 
 const LandingPage = () => {
+  // Theme Context থেকে dark স্টেট ডিস্ট্রাকচার করা হলো
+  const { theme } = useContext(ThemeContext);
+  const dark = theme === "dark";
+
+  // মূল ব্র্যান্ড কালার
+  const primaryColor = dark ? 'text-cyan-400' : 'text-[#27445D]'; // Dark mode primary accent: Cyan
+  const darkBlue = '#27445D'; 
+
   useEffect(() => {
     AOS.init({
       duration: 1200,
@@ -31,30 +42,42 @@ const LandingPage = () => {
   ];
 
   return (
-    <div className="relative min-h-screen flex flex-col md:flex-row items-center justify-between px-8 md:px-12 py-10 overflow-hidden">
+    <div className={`relative min-h-screen flex flex-col md:flex-row items-center justify-between 
+                     px-8 md:px-12 py-10 overflow-hidden 
+                     ${dark ? 'bg-gray-900 text-gray-100' : 'bg-white text-gray-800'}`}> 
+      
       {/* Background */}
       <div className="absolute inset-0">
-        <img
-          src="https://i.ibb.co.com/TMwRrtS3/world-map-page-0001.jpg"
-          alt="Background"
-          className="w-full h-full object-cover"
+        {/* Dynamic Background Gradient */}
+        <div className={`absolute inset-0 
+                         ${dark 
+                           ? 'bg-gradient-to-r from-gray-900/90 to-gray-800/80' 
+                           : 'bg-gradient-to-r from-primary/30 to-gray-50/80'}`} 
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-primary/30 to-gray-50/80" />
+        {/* Optional: Add a subtle texture/pattern for Dark Mode */}
+        {dark && (
+          <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'url("https://www.transparenttextures.com/patterns/black-linen.png")' }}></div>
+        )}
       </div>
 
-      {/* Left Section */}
+      {/* Left Section: Text Content */}
       <div
         data-aos="fade-right"
         className="md:w-1/2 text-center md:text-left space-y-6 z-10"
       >
-        <h1 className="text-4xl md:text-5xl font-extrabold text-[#27445D] leading-tight">
-          <span className="text-[#27445D]">LifeSecure</span> – Your <br />Partner in Protection
+        <h1 
+          className="text-4xl md:text-5xl font-extrabold leading-tight"
+          style={{ color: dark ? 'white' : darkBlue }} 
+        >
+          <span className={primaryColor}>LifeSecure</span> – Your <br />Partner in Protection
         </h1>
 
-      <p className="text-gray-700 text-lg md:text-xl max-w-md mx-auto md:mx-0">
-  <span className="font-semibold text-[#27445D]">LifeSecure</span> — your trusted partner for smart, safe, and flexible life insurance protection.
+  <p 
+  className={`text-lg md:text-xl max-w-md mx-auto md:mx-0 
+              ${dark ? 'text-gray-300' : 'text-gray-700'}`} 
+>
+  <span className={`font-semibold ${primaryColor}`}>LifeSecure</span> — your trusted partner for smart, safe, and flexible life insurance protection.
 </p>
-
 
         {/* Button */}
         <div
@@ -63,16 +86,21 @@ const LandingPage = () => {
         >
           <Link
             to="/learnMore"
-           className="btn bg-primary text-white hover:bg-white hover:text-primary border-2 border-primary px-6 py-3 rounded-lg transition duration-300"
+       
+            className={`btn px-6 py-3 rounded-lg transition duration-300 border-2 
+                       ${dark 
+                         ? 'bg-cyan-500 text-gray-900 border-cyan-500 hover:bg-gray-100 hover:text-cyan-600' 
+                         : 'bg-primary text-white border-primary hover:bg-white hover:text-primary'}`
+                       }
           >
-            See More →
+            See More <FaArrowRight className="inline ml-2" />
           </Link>
         </div>
 
         {/* Features */}
         <div
           data-aos="zoom-in-up"
-          className="flex justify-center md:justify-start gap-6 pt-6 text-gray-700"
+          className="flex justify-center md:justify-start gap-6 pt-6"
         >
           {[
             { icon: <FaShieldAlt />, text: "Secure Coverage" },
@@ -81,9 +109,18 @@ const LandingPage = () => {
           ].map((item, i) => (
             <div
               key={i}
-              className="flex items-center gap-2 bg-white/70 backdrop-blur-md px-4 py-2 rounded-full shadow-md hover:scale-105 transition-transform duration-300"
+          
+              className={`flex items-center gap-2 px-4 py-2 rounded-full shadow-md hover:scale-105 transition-transform duration-300 
+                         ${dark 
+                           ? 'bg-gray-700/80 text-gray-200 border border-gray-600' 
+                           : 'bg-white/70 backdrop-blur-md text-gray-700'}`
+                         }
             >
-              <span className="text-[#27445D] text-lg">{item.icon}</span>
+              <span 
+                className={`text-lg ${dark ? 'text-cyan-400' : 'text-[#27445D]'}`} // Icon color change
+              >
+                {item.icon}
+              </span>
               <span className="font-medium">{item.text}</span>
             </div>
           ))}
@@ -100,41 +137,54 @@ const LandingPage = () => {
           data-aos="zoom-in"
           className="relative w-full max-w-3xl mx-auto flex justify-center items-center"
         >
+          {/* Hero Left Image */}
           <img
             src={heroLeft}
             alt="Left"
             className="w-36 h-52 md:w-44 md:h-60 object-cover rounded-3xl shadow-2xl 
-            opacity-85 hover:opacity-100 transition-all duration-500 
-            -rotate-6 hover:-rotate-3 brightness-90 hover:brightness-105"
+                       opacity-85 hover:opacity-100 transition-all duration-500 
+                       -rotate-6 hover:-rotate-3 brightness-90 hover:brightness-105 
+                       border-2 border-transparent"
           />
 
+          {/* Hero Main Image center*/}
           <div className="relative z-20 scale-110 hover:scale-115 transition-transform duration-500">
             <img
               src={heroMain}
               alt="Main"
-              className="w-52 h-64 md:w-60 md:h-72 object-cover rounded-[2rem] 
-              shadow-[0_10px_25px_rgba(0,0,0,0.25)] border-2 border-white 
-              hover:shadow-[0_20px_40px_rgba(0,0,0,0.35)] transition-all duration-500"
+              className={`w-52 h-64 md:w-60 md:h-72 object-cover rounded-[2rem] 
+                         shadow-[0_10px_25px_rgba(0,0,0,0.25)] transition-all duration-500 
+                         hover:shadow-[0_20px_40px_rgba(0,0,0,0.35)] 
+                         ${dark ? 'border-2 border-gray-700' : 'border-2 border-white'}`} // Border color change
             />
-            <div className="absolute inset-0 rounded-[2rem] bg-gradient-to-t from-black/30 via-transparent to-transparent"></div>
+          
+            <div className="absolute inset-0 rounded-[2rem] bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
           </div>
 
+          {/* Hero Right Image */}
           <img
             src={heroRight}
             alt="Right"
             className="w-36 h-52 md:w-44 md:h-60 object-cover rounded-3xl shadow-2xl 
-            opacity-85 hover:opacity-100 transition-all duration-500 
-            rotate-6 hover:rotate-3 brightness-90 hover:brightness-105"
+                       opacity-85 hover:opacity-100 transition-all duration-500 
+                       rotate-6 hover:rotate-3 brightness-90 hover:brightness-105 
+                       border-2 border-transparent"
           />
 
-          {/* Background Glow */}
-          <div className="absolute inset-0 blur-3xl bg-gradient-to-r from-blue-400/20 via-cyan-400/20 to-green-400/20 -z-10"></div>
+          
+          <div className={`absolute inset-0 blur-3xl -z-10 
+                           ${dark 
+                             ? 'bg-gradient-to-r from-cyan-400/20 via-blue-400/20 to-teal-400/20' 
+                             : 'bg-gradient-to-r from-blue-400/20 via-cyan-400/20 to-green-400/20'}`
+                           }>
+          </div>
         </div>
 
         {/* Bottom Swiper */}
         <div
           data-aos="fade-up"
-          className="w-full max-w-md rounded-3xl overflow-hidden shadow-2xl relative"
+          className={`w-full max-w-md rounded-3xl overflow-hidden shadow-2xl relative 
+                     ${dark ? 'border border-gray-700' : ''}`}
         >
           <Swiper
             modules={[Autoplay, Pagination, EffectFade]}
@@ -152,8 +202,11 @@ const LandingPage = () => {
                     alt={slide.title}
                     className="w-full h-64 object-cover"
                   />
+                  
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
-                  <h2 className="absolute bottom-6 left-1/2 -translate-x-1/2 text-white text-xl font-semibold tracking-wide px-4 py-2 rounded-full ">
+                  <h2 className={`absolute bottom-6 left-1/2 -translate-x-1/2 text-white text-xl font-semibold tracking-wide px-4 py-2 rounded-full 
+                      `} // 
+                  >
                     {slide.title}
                   </h2>
                 </div>
